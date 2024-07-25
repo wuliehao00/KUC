@@ -1,0 +1,3297 @@
+{
+	"info": {
+		"_postman_id": "fc630877-7b8b-401b-806f-f8e84362ffaa",
+		"name": "MSOClient",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33400951",
+		"_collection_link": "https://galactic-trinity-367893.postman.co/workspace/KVBAUTOTest-Workspace~c8b8b2ef-9830-40ee-85c1-4f015dd709f3/collection/33400951-fc630877-7b8b-401b-806f-f8e84362ffaa?action=share&source=collection_link&creator=33400951"
+	},
+	"item": [
+		{
+			"name": "add retail client",
+			"item": [
+				{
+					"name": "addRetailClient(正常场景)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Status=0\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(0);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"referenceID\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.referenceID).to.eql(pm.environment.get(\"random_string\"));\r",
+									"});\r",
+									"\r",
+									"pm.test('retailClientID', function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									" \r",
+									"    pm.expect(jsonData.data).to.have.property('retailClientID');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"customerID\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.customerID).to.eql(149619);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"firstName\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.firstName).to.eql(pm.environment.get(\"random_string\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"lastName\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.lastName).to.eql(pm.environment.get(\"random_string\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"gender\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.gender).to.eql(pm.environment.get(\"gender\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"title\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.title).to.eql(pm.environment.get(\"title\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"nationality\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.nationality).to.eql(\"CN\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"idType\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.idType).to.eql(pm.environment.get(\"idType\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"idNumber\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.idNumber).to.eql(pm.environment.get(\"random_string\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"idVersionNumber\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.idVersionNumber).to.eql(pm.environment.get(\"random_string\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"idIssueCountry\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.idIssueCountry).to.eql(\"CN\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"phoneNumber\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.phoneNumber).to.eql(pm.environment.get(\"random_string\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"residentialAddress\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.residentialAddress).to.eql(pm.environment.get(\"random_string\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"residentialStreet\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.residentialStreet).to.eql(pm.environment.get(\"random_string\"));\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"residentialCity\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.residentialCity).to.eql(pm.environment.get(\"random_string\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"residentialState\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.residentialState).to.eql(pm.environment.get(\"random_string\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"residentialPostalCode\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.residentialPostalCode).to.eql(pm.environment.get(\"random_string\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"residentialCountry\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.residentialCountry).to.eql(\"CN\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"email\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.email).to.eql(pm.environment.get(\"random_string\")+\"@qq.com\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"industry\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.industry).to.eql(pm.environment.get(\"industry\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"jobLevel\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.jobLevel).to.eql(pm.environment.get(\"joblevel\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"occupation\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.occupation).to.eql(pm.environment.get(\"random_string\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"currencyPair\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.currencyPair).to.eql(pm.environment.get(\"currencyPair\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"fatcaDeclaration\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.fatcaDeclaration).to.eql(pm.environment.get(\"fatcaDeclaration\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"masterAgreementConfirm\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.masterAgreementConfirm).to.eql(pm.environment.get(\"masterAgreementConfirm\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"jumioResult\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.jumioResult).to.eql(pm.environment.get(\"random_string\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"accountPurpose\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.accountPurpose).to.eql(pm.environment.get(\"random_string\"));\r",
+									"});\r",
+									"\r",
+									"var Json = pm.response.json();\r",
+									"//存储 retailClientID\r",
+									"var retailClientID = Json.data.retailClientID;\r",
+									"pm.environment.set(\"retailClientID\",retailClientID);\r",
+									"\r",
+									"\r",
+									"var customerID = Json.data.customerID;\r",
+									"pm.environment.set(\"customerID\",customerID);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// 生成随机字符串的函数\r",
+									"function generateRandomString(length) {\r",
+									"  var result           = '';\r",
+									"  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';\r",
+									"  var charactersLength = characters.length;\r",
+									"  for (var i = 0; i < length; i++) {\r",
+									"    result += characters.charAt(Math.floor(Math.random() * charactersLength));\r",
+									"  }\r",
+									"  return result;\r",
+									"}\r",
+									"// 设置一个环境变量，名为random_string，值为随机生成的字符串\r",
+									"pm.environment.set(\"random_string\", generateRandomString(10));\r",
+									"pm.environment.set(\"random_string_1000\",generateRandomString(1000));\r",
+									"\r",
+									"// 生成特殊字符串的函数\r",
+									"function generateSpecialString(length) {\r",
+									"  var result           = '';\r",
+									"  var characters       = '￥$=()囫囵\\n\\rnull ';\r",
+									"  var charactersLength = characters.length;\r",
+									"  for (var i = 0; i < length; i++) {\r",
+									"    result += characters.charAt(Math.floor(Math.random() * charactersLength));\r",
+									"  }\r",
+									"  return result;\r",
+									"}\r",
+									"pm.environment.set(\"special_string\", generateSpecialString(10));\r",
+									"\r",
+									"//gender  枚举值：Male/Female,随机选择枚举值\r",
+									"var genders = [\"Male\",\"Female\"];\r",
+									"var gender = genders[Math.floor(Math.random() * genders.length)];\r",
+									"pm.environment.set(\"gender\",gender);\r",
+									"\r",
+									"//title  枚举值： Mr.,Mrs.,Ms.,Miss\r",
+									"var titles = [\"Mr.\",\"Mrs.\",\"Ms.\",\"Miss\"];\r",
+									"var title = titles[Math.floor(Math.random() * titles.length)];\r",
+									"pm.environment.set(\"title\",title);\r",
+									"\r",
+									"//idType  枚举值： Driver's License,Passport,ID Card\r",
+									"var idTypes = [\"Driver's License\",\"Passport\",\"ID Card\"];\r",
+									"var idType = idTypes[Math.floor(Math.random() * idTypes.length)];\r",
+									"pm.environment.set(\"idType\",idType);\r",
+									"\r",
+									"//industry  枚举值\r",
+									"var industrys = [\"Military / Weaponry\",\"Sex-related\",\"Unregulated / Online Gambling\",\"Art and Antique Dealer\",\"Casinos\",\"Charity\",\"Equity crowd funding platforms\",\"Internet-based payment service\", \"Jewelry, Precious Stone, Metals and Dealing\", \"Karaoke Centre, Arcade House\", \"Massage Parlour\", \"Money Business\", \"Night Club / Disco\", \"Racing Industry Transition Agency\", \"Real Estate / Property Management\", \"Regulated Casino\", \"Virtual Asset / Commodity / Currency\", \"Accountants\", \"Advisory / Consultant Service\", \"Auctioneer\", \"Brokers and custodians\", \"Cash transport\", \"Entertainment\", \"Financial Advisory\", \"Legal Service\", \"Managed investment scheme managers\", \"Money Lender\", \"Pawn Shop\", \"Stored value cards\", \"Trust and company service providers\", \"Agriculture / Fishing / Forestry\", \"Arts / Sports / Religious\", \"Construction / Engineering\", \"Conveyancers\", \"Customer Service\", \"Debt collection\", \"Education\", \"Financial leasing\", \"Food & Beverage / Catering\", \"Government / Public Utilities\", \"Import / Export & Trading\", \"Information Technology\", \"Insurance\", \"Investment / Securities\", \"Manufacturing\", \"Media / Printing / Publishing\", \"Medical Service\", \"Safe deposit boxes\", \"Self-Employed\", \"TeleCom / Communication\", \"Tourism / Hotel / Hospitality\", \"Transportation / Logistics\", \"Utilities\", \"Wholesale / Retail\", \"Others\", \"Home Duties\", \"Retired\", \"Student\", \"Unemployed\"];\r",
+									"var industry = industrys[Math.floor(Math.random() * industrys.length)];\r",
+									"pm.environment.set(\"industry\",industry);\r",
+									"\r",
+									"//joblevel  枚举值\r",
+									"var joblevels = [\"Business Owner / CEO / Chairman / Director\", \"Senior Manager / Manager\", \"Team members\", \"Self-employed\", \"Not Employed\"];\r",
+									"var joblevel = joblevels[Math.floor(Math.random() * joblevels.length)];\r",
+									"pm.environment.set(\"joblevel\",joblevel);\r",
+									"\r",
+									"//fatcaDeclaration  枚举值  true/false\r",
+									"var fatcaDeclarations = [true,false];\r",
+									"var fatcaDeclaration = fatcaDeclarations[Math.floor(Math.random() * fatcaDeclarations.length)];\r",
+									" pm.environment.set(\"fatcaDeclaration\",fatcaDeclaration);\r",
+									"\r",
+									" //masterAgreementConfirm\r",
+									"var masterAgreementConfirms = [true,false];\r",
+									"var masterAgreementConfirm = masterAgreementConfirms[Math.floor(Math.random() * masterAgreementConfirms.length)];\r",
+									" pm.environment.set(\"masterAgreementConfirm\",masterAgreementConfirm);\r",
+									"\r",
+									"//currencyPair\r",
+									"var currencyPairs = [\"USDHKD\",\"HKDJPY\",\"GBPCNH\"];\r",
+									"var currencyPair = currencyPairs[Math.floor(Math.random() * currencyPairs.length)];\r",
+									"pm.environment.set(\"currencyPair\",currencyPair);\r",
+									"//获取birthday随机数\r",
+									"var now = new Date();\r",
+									"var year = now.getUTCFullYear();\r",
+									"var Month = (now.getUTCMonth()+1).toString().padStart(2,'0');\r",
+									"var day = now.getUTCDate().toString().padStart(2,'0');\r",
+									"var hours = now.getUTCHours().toString().padStart(2,'0');\r",
+									"var minutes = now.getMinutes().toString().padStart(2,'0');\r",
+									"var seconds = now.getMilliseconds().toString().padStart(2,'0');\r",
+									"var birthday_time = year+'-'+Month+'-'+day+'T'+hours+':'+minutes+':'+seconds+'Z';\r",
+									"pm.environment.set(\"birthday\",birthday_time);\r",
+									"var birthday_time2 = year+'-'+Month+'-'+day;\r",
+									"pm.environment.set(\"birthday2\",birthday_time2);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"referenceID\": \"{{random_string}}\",\r\n  \"firstName\": \"{{random_string}}\",\r\n  \"lastName\": \"{{random_string}}\",\r\n  \"birthday\": \"{{birthday}}\",\r\n  \"gender\": \"{{gender}}\",\r\n  \"title\": \"{{title}}\",\r\n  \"nationality\": \"CN\",\r\n  \"idType\": \"{{idType}}\",\r\n  \"accountPurpose\":\"{{random_string}}\",\r\n  \"idNumber\": \"{{random_string}}\",\r\n  \"idVersionNumber\": \"{{random_string}}\",\r\n  \"idIssueDate\": \"{{birthday}}\",\r\n  \"idIssueCountry\": \"CN\",\r\n  \"idExpiration\": \"{{birthday}}\",\r\n  \"phoneNumber\": \"{{random_string}}\",\r\n  \"residentialAddress\": \"{{random_string}}\",\r\n  \"residentialStreet\": \"{{random_string}}\",\r\n  \"residentialCity\": \"{{random_string}}\",\r\n  \"residentialState\": \"{{random_string}}\",\r\n  \"residentialPostalCode\": \"{{random_string}}\",\r\n  \"residentialCountry\": \"CN\",\r\n  \"email\": \"{{random_string}}@qq.com\",\r\n  \"industry\": \"{{industry}}\",\r\n  \"jobLevel\": \"{{joblevel}}\",\r\n  \"occupation\": \"{{random_string}}\",\r\n  \"currencyPair\": \"{{currencyPair}}\",\r\n  \"fatcaDeclaration\": {{fatcaDeclaration}},\r\n  \"masterAgreementConfirm\": {{masterAgreementConfirm}},\r\n  \"jumioResult\": \"{{random_string}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/demo/retailclients",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retailclients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addRetailClient(传入枚举值之外的值，调用失败)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"status=1\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"error message-gender\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.errors[0].message).to.eql(\"\\\"gender\\\" only accept the following values: \\\"Male\\\", \\\"Female\\\"\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"error message-title\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.errors[1].message).to.eql(\"\\\"title\\\" only accept the following values: \\\"Mr.\\\", \\\"Mrs.\\\", \\\"Ms.\\\", \\\"Miss\\\"\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"error message-idType\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.errors[2].message).to.eql(\"\\\"idType\\\" only accept the following values: \\\"Driver's License\\\", \\\"Passport\\\", \\\"ID Card\\\"\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"error message-industry\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.errors[3].message).to.eql(\"\\\"industry\\\" only accept the following values: \\\"Military / Weaponry\\\", \\\"Sex-related\\\", \\\"Unregulated / Online Gambling\\\", \\\"Art and Antique Dealer\\\", \\\"Casinos\\\", \\\"Charity\\\", \\\"Equity crowd funding platforms\\\", \\\"Internet-based payment service\\\", \\\"Jewelry, Precious Stone, Metals and Dealing\\\", \\\"Karaoke Centre, Arcade House\\\", \\\"Massage Parlour\\\", \\\"Money Business\\\", \\\"Night Club / Disco\\\", \\\"Racing Industry Transition Agency\\\", \\\"Real Estate / Property Management\\\", \\\"Regulated Casino\\\", \\\"Virtual Asset / Commodity / Currency\\\", \\\"Accountants\\\", \\\"Advisory / Consultant Service\\\", \\\"Auctioneer\\\", \\\"Brokers and custodians\\\", \\\"Cash transport\\\", \\\"Entertainment\\\", \\\"Financial Advisory\\\", \\\"Legal Service\\\", \\\"Managed investment scheme managers\\\", \\\"Money Lender\\\", \\\"Pawn Shop\\\", \\\"Stored value cards\\\", \\\"Trust and company service providers\\\", \\\"Agriculture / Fishing / Forestry\\\", \\\"Arts / Sports / Religious\\\", \\\"Construction / Engineering\\\", \\\"Conveyancers\\\", \\\"Customer Service\\\", \\\"Debt collection\\\", \\\"Education\\\", \\\"Financial leasing\\\", \\\"Food & Beverage / Catering\\\", \\\"Government / Public Utilities\\\", \\\"Import / Export & Trading\\\", \\\"Information Technology\\\", \\\"Insurance\\\", \\\"Investment / Securities\\\", \\\"Manufacturing\\\", \\\"Media / Printing / Publishing\\\", \\\"Medical Service\\\", \\\"Safe deposit boxes\\\", \\\"Self-Employed\\\", \\\"TeleCom / Communication\\\", \\\"Tourism / Hotel / Hospitality\\\", \\\"Transportation / Logistics\\\", \\\"Utilities\\\", \\\"Wholesale / Retail\\\", \\\"Others\\\", \\\"Home Duties\\\", \\\"Retired\\\", \\\"Student\\\", \\\"Unemployed\\\"\");\r",
+									"\r",
+									"\r",
+									"    pm.test(\"error message-jobLevel\", function () {\r",
+									"        var jsonData = pm.response.json();\r",
+									"        pm.expect(jsonData.errors[4].message).to.eql(\"\\\"jobLevel\\\" only accept the following values: \\\"Business Owner / CEO / Chairman / Director\\\", \\\"Senior Manager / Manager\\\", \\\"Team members\\\", \\\"Self-employed\\\", \\\"Not Employed\\\"\");\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"error message-currencyPair\", function () {\r",
+									"        var jsonData = pm.response.json();\r",
+									"        pm.expect(jsonData.errors[5].message).to.eql(\"\\\"currencyPair\\\" must be a string of the list of comma separated currency pair(s) (e.g. \\\"USDHKD,HKDJPY,GBPCNH\\\")\");\r",
+									"    });\r",
+									"\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"referenceID\": \"{{$guid}}\",\r\n  \"firstName\": \"{{random_string}}\",\r\n  \"lastName\": \"{{random_string}}\",\r\n  \"birthday\": \"{{birthday}}\",\r\n  \"gender\": \"{{random_string}}\",\r\n  \"title\": \"{{random_string}}\",\r\n  \"nationality\": \"CN\",\r\n  \"idType\": \"{{random_string}}\",\r\n  \"accountPurpose\":\"{{random_string}}\",\r\n  \"idNumber\": \"{{random_string}}\",\r\n  \"idVersionNumber\": \"{{random_string}}\",\r\n  \"idIssueDate\": \"{{birthday}}\",\r\n  \"idIssueCountry\": \"CN\",\r\n  \"idExpiration\": \"{{birthday}}\",\r\n  \"phoneNumber\": \"{{random_string}}\",\r\n  \"residentialAddress\": \"{{random_string}}\",\r\n  \"residentialStreet\": \"{{random_string}}\",\r\n  \"residentialCity\": \"{{random_string}}\",\r\n  \"residentialState\": \"{{random_string}}\",\r\n  \"residentialPostalCode\": \"{{random_string}}\",\r\n  \"residentialCountry\": \"CN\",\r\n  \"email\": \"{{random_string}}@qq.com\",\r\n  \"industry\": \"{{random_string}}\",\r\n  \"jobLevel\": \"{{random_string}}\",\r\n  \"occupation\": \"{{random_string}}\",\r\n  \"currencyPair\": \"{{random_string}}\",\r\n  \"fatcaDeclaration\": true,\r\n  \"masterAgreementConfirm\": true,\r\n  \"jumioResult\": \"{{random_string}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/demo/retailclients",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retailclients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addRetailClient(email格式错误，调用失败）",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"status=1\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(1);\r",
+									"});\r",
+									"pm.test(\"error message\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.errors[0].message).to.eql(\"\\\"email\\\" are constrainted as below:\\n- Consecutive dots (.) are not allowed\\n- Only dot (.), underscore (_), and hyphen (-) are allowed for special characters\\n- Dot (.) is not allowed at the start and end of the local part\\n- A maximum of 64 characters are allowed for the local part\\n Dot (.), underscore (_), and hyphen (-) is not allowed at the start of the domain name\\n- A minimum of 2 characters are required for the top-level domain extension\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"referenceID\": \"{{$guid}}\",\r\n  \"firstName\": \"{{random_string}}\",\r\n  \"lastName\": \"{{random_string}}\",\r\n  \"birthday\": \"{{birthday}}\",\r\n  \"gender\": \"{{gender}}\",\r\n  \"title\": \"{{title}}\",\r\n  \"nationality\": \"CN\",\r\n  \"idType\": \"{{idType}}\",\r\n  \"accountPurpose\":\"{{random_string}}\",\r\n  \"idNumber\": \"{{random_string}}\",\r\n  \"idVersionNumber\": \"{{random_string}}\",\r\n  \"idIssueDate\": \"{{birthday}}\",\r\n  \"idIssueCountry\": \"CN\",\r\n  \"idExpiration\": \"{{birthday}}\",\r\n  \"phoneNumber\": \"{{random_string}}\",\r\n  \"residentialAddress\": \"{{random_string}}\",\r\n  \"residentialStreet\": \"{{random_string}}\",\r\n  \"residentialCity\": \"{{random_string}}\",\r\n  \"residentialState\": \"{{random_string}}\",\r\n  \"residentialPostalCode\": \"{{random_string}}\",\r\n  \"residentialCountry\": \"CN\",\r\n  \"email\": \"{{random_string}}\",\r\n  \"industry\": \"{{industry}}\",\r\n  \"jobLevel\": \"{{joblevel}}\",\r\n  \"occupation\": \"{{random_string}}\",\r\n  \"currencyPair\": \"USDHKD\",\r\n  \"fatcaDeclaration\": {{fatcaDeclaration}},\r\n  \"masterAgreementConfirm\": {{masterAgreementConfirm}},\r\n  \"jumioResult\": \"{{random_string}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/demo/retailclients",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retailclients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addRetailClient(phoneNumber包含字母，预期调用失败)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"status=1\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(1);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"referenceID\": \"{{$guid}}\",\r\n  \"firstName\": \"{{random_string}}\",\r\n  \"lastName\": \"{{random_string}}\",\r\n  \"birthday\": \"{{birthday}}\",\r\n  \"gender\": \"{{gender}}\",\r\n  \"title\": \"{{title}}\",\r\n  \"nationality\": \"CN\",\r\n  \"idType\": \"{{idType}}\",\r\n  \"accountPurpose\":\"{{random_string}}\",\r\n  \"idNumber\": \"{{random_string}}\",\r\n  \"idVersionNumber\": \"{{random_string}}\",\r\n  \"idIssueDate\": \"{{birthday}}\",\r\n  \"idIssueCountry\": \"CN\",\r\n  \"idExpiration\": \"{{birthday}}\",\r\n  \"phoneNumber\": \"{{random_string}}\",\r\n  \"residentialAddress\": \"{{random_string}}\",\r\n  \"residentialStreet\": \"{{random_string}}\",\r\n  \"residentialCity\": \"{{random_string}}\",\r\n  \"residentialState\": \"{{random_string}}\",\r\n  \"residentialPostalCode\": \"{{random_string}}\",\r\n  \"residentialCountry\": \"CN\",\r\n  \"email\": \"{{random_string}}@qq.com\",\r\n  \"industry\": \"{{industry}}\",\r\n  \"jobLevel\": \"{{joblevel}}\",\r\n  \"occupation\": \"{{random_string}}\",\r\n  \"currencyPair\": \"USDHKD\",\r\n  \"fatcaDeclaration\": {{fatcaDeclaration}},\r\n  \"masterAgreementConfirm\": {{masterAgreementConfirm}},\r\n  \"jumioResult\": \"{{random_string}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/demo/retailclients",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retailclients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addRetailClient(firstName,lastName,accountPurpose等字符串超过边界,响应体提示unknown failure)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"status=1\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"errors message\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.errors[0].message).to.eql(\"Unknown failure\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// 生成随机字符串的函数\r",
+									"function generateRandomString(length) {\r",
+									"  var result           = '';\r",
+									"  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';\r",
+									"  var charactersLength = characters.length;\r",
+									"  for (var i = 0; i < length; i++) {\r",
+									"    result += characters.charAt(Math.floor(Math.random() * charactersLength));\r",
+									"  }\r",
+									"  return result;\r",
+									"}\r",
+									"\r",
+									"var str_outofrange = generateRandomString(200) + \"测试 @@ ¥,O(∩_∩)O哈哈~ \";\r",
+									"pm.environment.set(\"str_outofrange\",str_outofrange);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "/**\r\n针对firstName,lastName,accountPurpose,idNumber,idVersionNumber,residentialAddress,residentialStreet,residentialCity,residentialState,occupation,jumioResult字符做长度校验，校验值统一=200\r\n*/\r\n{\r\n  \"referenceID\": \"{{$guid}}\",\r\n  \"firstName\": \"{{str_outofrange}}\",\r\n  \"lastName\": \"{{str_outofrange}}\",\r\n  \"birthday\": \"{{birthday}}\",\r\n  \"gender\": \"{{gender}}\",\r\n  \"title\": \"{{title}}\",\r\n  \"nationality\": \"CN\",\r\n  \"idType\": \"{{idType}}\",\r\n  \"accountPurpose\":\"{{str_outofrange}}\",\r\n  \"idNumber\": \"{{str_outofrange}}\",\r\n  \"idVersionNumber\": \"{{str_outofrange}}\",\r\n  \"idIssueDate\": \"{{birthday}}\",\r\n  \"idIssueCountry\": \"CN\",\r\n  \"idExpiration\": \"{{birthday}}\",\r\n  \"phoneNumber\": \"{{random_string}}\",\r\n  \"residentialAddress\": \"{{str_outofrange}}\",\r\n  \"residentialStreet\": \"{{str_outofrange}}\",\r\n  \"residentialCity\": \"{{str_outofrange}}\",\r\n  \"residentialState\": \"{{str_outofrange}}\",\r\n  \"residentialPostalCode\": \"{{random_string}}\",\r\n  \"residentialCountry\": \"CN\",\r\n  \"email\": \"{{random_string}}@qq.com\",\r\n  \"industry\": \"{{industry}}\",\r\n  \"jobLevel\": \"{{joblevel}}\",\r\n  \"occupation\": \"{{str_outofrange}}\",\r\n  \"currencyPair\": \"USDHKD\",\r\n  \"fatcaDeclaration\": {{fatcaDeclaration}},\r\n  \"masterAgreementConfirm\": {{masterAgreementConfirm}},\r\n  \"jumioResult\": \"{{str_outofrange}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/demo/retailclients",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retailclients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addRetailClient(nationality,idIssueCountry,residentialCountry超过2个字符)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"status=1\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Error Message\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.errors[0].message).to.eql(\"\\\"nationality\\\" must be in the ISO 3166-2 Code format (2 characters)\");\r",
+									"    pm.expect(jsonData.errors[1].message).to.eql(\"\\\"idIssueCountry\\\" must be in the ISO 3166-2 Code format (2 characters)\");\r",
+									"    pm.expect(jsonData.errors[2].message).to.eql(\"\\\"residentialCountry\\\" must be in the ISO 3166-2 Code format (2 characters)\");\r",
+									"\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"referenceID\": \"{{random_string}}\",\r\n  \"firstName\": \"{{random_string}}\",\r\n  \"lastName\": \"{{random_string}}\",\r\n  \"birthday\": \"{{birthday}}\",\r\n  \"gender\": \"{{gender}}\",\r\n  \"title\": \"{{title}}\",\r\n  \"nationality\": \"CNB\",\r\n  \"idType\": \"{{idType}}\",\r\n  \"accountPurpose\":\"{{random_string}}\",\r\n  \"idNumber\": \"{{random_string}}\",\r\n  \"idVersionNumber\": \"{{random_string}}\",\r\n  \"idIssueDate\": \"{{birthday}}\",\r\n  \"idIssueCountry\": \"CNB\",\r\n  \"idExpiration\": \"{{birthday}}\",\r\n  \"phoneNumber\": \"{{random_string}}\",\r\n  \"residentialAddress\": \"{{random_string}}\",\r\n  \"residentialStreet\": \"{{random_string}}\",\r\n  \"residentialCity\": \"{{random_string}}\",\r\n  \"residentialState\": \"{{random_string}}\",\r\n  \"residentialPostalCode\": \"{{random_string}}\",\r\n  \"residentialCountry\": \"CNB\",\r\n  \"email\": \"{{random_string}}@qq.com\",\r\n  \"industry\": \"{{industry}}\",\r\n  \"jobLevel\": \"{{joblevel}}\",\r\n  \"occupation\": \"{{random_string}}\",\r\n  \"currencyPair\": \"USDHKD\",\r\n  \"fatcaDeclaration\": {{fatcaDeclaration}},\r\n  \"masterAgreementConfirm\": {{masterAgreementConfirm}},\r\n  \"jumioResult\": \"{{random_string}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/demo/retailclients",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retailclients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addRetailClient(referenceID重复)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"status=1\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(1);\r",
+									"});\r",
+									"\r",
+									"//referenceID重复\r",
+									"pm.test(\"error message\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.errors[0].message).to.eql(\"The referenceID already occupied\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"birthday\": \"1996-01-01\",\r\n  \"lastName\": \"LAST\",\r\n  \"residentialPostalCode\": \"2019\",\r\n  \"occupation\": \"Wholesale / Retail\",\r\n  \"gender\": \"Female\",\r\n  \"masterAgreementConfirm\": true,\r\n  \"industry\": \"Wholesale / Retail\",\r\n  \"title\": \"Miss\",\r\n  \"idNumber\": \"AB123456\",\r\n  \"idIssueCountry\": \"NZ\",\r\n  \"residentialCountry\": \"NZ\",\r\n  \"idVersionNumber\": \"987\",\r\n  \"accountPurpose\": \"remittance\",\r\n  \"email\": \"test.email@email.com\",\r\n  \"currencyPair\": \"NZDCNY\",\r\n  \"jumioResult\": \"0000000-b5e0-4a93-92b7-0000000000\",\r\n  \"idType\": \"Driver's License\",\r\n  \"idIssueDate\": \"2032-03-06\",\r\n  \"residentialState\": \"AUCKLAND\",\r\n  \"referenceID\": \"{{random_string}}\",\r\n  \"residentialStreet\": \"50 TEST DRIVE\",\r\n  \"jobLevel\": \"Team members\",\r\n  \"firstName\": \"FIRST\",\r\n  \"idExpiration\": \"2035-03-06\",\r\n  \"phoneNumber\": \"21212121\",\r\n  \"nationality\": \"CN\",\r\n  \"residentialAddress\": \"50 TEDT DRIVE AUCKLAND New Zealand\",\r\n  \"residentialCity\": \"AUCKLAND\",\r\n  \"fatcaDeclaration\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/demo/retailclients",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retailclients"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Search retail client",
+			"item": [
+				{
+					"name": "Search retail client(不携带offset and limit)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//默认记录条数是30条\r",
+									"pm.test(\"返回记录条数=30条\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.length).to.eql(30);\r",
+									"});\r",
+									"\r",
+									"//默认从第一条开始\r",
+									"pm.test(\"retailClientID=1\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data[0].retailClientID).to.eql(1);\r",
+									"});\r",
+									"\r",
+									"//offset=0\r",
+									"pm.test(\"offset=0\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.meta.offset).to.eql(0);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/demo/retailclients",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retailclients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search retail client(offset =2,limit=10)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//记录条数是10条\r",
+									"pm.test(\"返回记录条数=10条\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.length).to.eql(10);\r",
+									"});\r",
+									"\r",
+									"//offset=2,所以第一条记录retailClientID=3\r",
+									"pm.test(\"retailClientID\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data[0].retailClientID).to.eql(3);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"offset=2\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.meta.offset).to.eql(2);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "offset",
+								"value": "2",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/demo/retailclients?offset=2&limit=10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retailclients"
+							],
+							"query": [
+								{
+									"key": "offset",
+									"value": "2"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search retail client(offset,limit传入非整数)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"status=1\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(1);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "offset",
+								"value": "2",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/demo/retailclients?offset=0&limit=aa",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retailclients"
+							],
+							"query": [
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "aa"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "update retail client",
+			"item": [
+				{
+					"name": "addRetailClient（增加一下retail,为更新接口做数据准备）",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// 生成随机字符串的函数\r",
+									"function generateRandomString(length) {\r",
+									"  var result           = '';\r",
+									"  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';\r",
+									"  var charactersLength = characters.length;\r",
+									"  for (var i = 0; i < length; i++) {\r",
+									"    result += characters.charAt(Math.floor(Math.random() * charactersLength));\r",
+									"  }\r",
+									"  return result;\r",
+									"}\r",
+									" \r",
+									"// 设置一个环境变量，名为random_string，值为随机生成的字符串\r",
+									"pm.environment.set(\"random_string_update\", generateRandomString(10));"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"referenceID\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.referenceID).to.eql(pm.environment.get(\"random_string_update\"));\r",
+									"});\r",
+									"\r",
+									"var Json = pm.response.json();\r",
+									"//存储 retailClientID\r",
+									"var retailClientID = Json.data.retailClientID;\r",
+									"pm.environment.set(\"retailClientID_update\",retailClientID);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"referenceID\": \"{{random_string_update}}\",\r\n  \"firstName\": \"wu\",\r\n  \"lastName\": \"liehao\",\r\n  \"birthday\": \"2019-08-24T14:15:22Z\",\r\n  \"gender\": \"male\",\r\n  \"title\": \"Miss\",\r\n  \"nationality\": \"CN\",\r\n  \"idType\": \"Driver's License\",\r\n  \"accountPurpose\":\"remittance\",\r\n  \"idNumber\": \"string\",\r\n  \"idVersionNumber\": \"987\",\r\n  \"idIssueDate\": \"2019-08-24T14:15:22Z\",\r\n  \"idIssueCountry\": \"NZ\",\r\n  \"idExpiration\": \"2019-08-24T14:15:22Z\",\r\n  \"phoneNumber\": \"2121212121\",\r\n  \"residentialAddress\": \"TEST\",\r\n  \"residentialStreet\": \"TEST\",\r\n  \"residentialCity\": \"TSET\",\r\n  \"residentialState\": \"TEST\",\r\n  \"residentialPostalCode\": \"123456\",\r\n  \"residentialCountry\": \"CN\",\r\n  \"email\": \"wuliehaokvb_msoclient@2925.com\",\r\n  \"industry\": \"Wholesale / Retail\",\r\n  \"jobLevel\": \"Team members\",\r\n  \"occupation\": \"Wholesale / Retail\",\r\n  \"currencyPair\": \"string\",\r\n  \"fatcaDeclaration\": true,\r\n  \"masterAgreementConfirm\": true,\r\n  \"jumioResult\": \"0000000-b5e0-4a93-92b7-0000000000\",\r\n  \"riskRating\": \"good\",\r\n  \"worldCheckResult\": \"good\",\r\n  \"truliooResult\": \"good\",\r\n  \"status\": \"good\",\r\n  \"remark\": \"good\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/demo/retailclients",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retailclients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get retail detail(use referenceID)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"retailClientID\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.retailClientID).to.eql(pm.environment.get(\"retailClientID_update\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"customerID\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.customerID).to.eql(pm.environment.get(\"customerID\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"referenceID\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.referenceID).to.eql(pm.environment.get(\"random_string_update\"));\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/demo/retailclients/getclient?referenceID={{random_string_update}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retailclients",
+								"getclient"
+							],
+							"query": [
+								{
+									"key": "referenceID",
+									"value": "{{random_string_update}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get retail detail(use retailClientID)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"retailClientID\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.retailClientID).to.eql(pm.environment.get(\"retailClientID_update\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"customerID\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.customerID).to.eql(pm.environment.get(\"customerID\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"referenceID\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.referenceID).to.eql(pm.environment.get(\"random_string_update\"));\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/demo/retailclients/getclient?retailClientID={{retailClientID_update}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retailclients",
+								"getclient"
+							],
+							"query": [
+								{
+									"key": "retailClientID",
+									"value": "{{retailClientID_update}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get retail detail(retailClientID为字母，调用失败)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"status=1\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(1);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/demo/retailclients/getclient?retailClientID=abcd",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retailclients",
+								"getclient"
+							],
+							"query": [
+								{
+									"key": "retailClientID",
+									"value": "abcd"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update retail client(正常场景)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//对比JSON字符串\r",
+									"var jsonDataString = JSON.stringify(pm.response.json().data);\r",
+									"var expectData = {\r",
+									"\t\"retailClientID\": pm.environment.get('retailClientID_update'),\r",
+									"\t\"customerID\": 149619,\r",
+									"\t\"referenceID\": pm.environment.get('random_string_update'),\r",
+									"\t\"firstName\": pm.environment.get('random_string_update'),\r",
+									"\t\"lastName\": pm.environment.get('random_string_update'),\r",
+									"\t\"birthday\": pm.environment.get('birthday2'),\r",
+									"\t\"gender\": pm.environment.get('gender'),\r",
+									"\t\"title\": pm.environment.get('title'),\r",
+									"\t\"nationality\": \"US\",\r",
+									"\t\"idType\": pm.environment.get('idType'),\r",
+									"\t\"idNumber\": pm.environment.get('random_string_update'),\r",
+									"\t\"idVersionNumber\": pm.environment.get('random_string_update'),\r",
+									"\t\"idIssueDate\": pm.environment.get('birthday2'),\r",
+									"\t\"idIssueCountry\": \"US\",\r",
+									"\t\"idExpiration\": pm.environment.get('birthday2'),\r",
+									"\t\"phoneNumber\": pm.environment.get('random_string_update'),\r",
+									"\t\"residentialAddress\": pm.environment.get('random_string_update'),\r",
+									"\t\"residentialStreet\":  pm.environment.get('random_string_update'),\r",
+									"\t\"residentialCity\": pm.environment.get('random_string_update'),\r",
+									"\t\"residentialState\": pm.environment.get('random_string_update'),\r",
+									"\t\"residentialPostalCode\": pm.environment.get('random_string_update'),\r",
+									"\t\"residentialCountry\": \"US\",\r",
+									"\t\"email\": pm.environment.get('random_string_update')+\"@qq.com\",\r",
+									"\t\"industry\": pm.environment.get('industry'),\r",
+									"\t\"jobLevel\": pm.environment.get('joblevel'),\r",
+									"\t\"occupation\": pm.environment.get('random_string_update'),\r",
+									"\t\"currencyPair\": pm.environment.get('currencyPair'),\r",
+									"\t\"fatcaDeclaration\": pm.environment.get('fatcaDeclaration'),\r",
+									"\t\"masterAgreementConfirm\": pm.environment.get('masterAgreementConfirm'),\r",
+									"\t\"jumioResult\": pm.environment.get('random_string_update'),\r",
+									"\t\"riskRating\": \"good\",\r",
+									"\t\"worldCheckResult\": \"good\",\r",
+									"\t\"truliooResult\": \"good\",\r",
+									"\t\"status\": \"Pending\",\r",
+									"\t\"remark\": null,\r",
+									"\t\"idCardNumber\": null,\r",
+									"\t\"idIssueState\": null,\r",
+									"\t\"accountPurpose\": pm.environment.get('random_string_update'),\r",
+									"};\r",
+									"\r",
+									"var expectDataString = JSON.stringify(expectData);\r",
+									"pm.test(\"Compare JSON strings\", function () {\r",
+									"    pm.expect(jsonDataString).to.eql(expectDataString);\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"retailClientID\": {{retailClientID_update}},\r\n  \"customerID\": 149619,\r\n  \"referenceID\": \"{{random_string_update}}\",\r\n  \"firstName\": \"{{random_string_update}}\",\r\n  \"lastName\": \"{{random_string_update}}\",\r\n  \"birthday\": \"{{birthday}}\",\r\n  \"gender\": \"{{gender}}\",\r\n  \"title\": \"{{title}}\",\r\n  \"nationality\": \"US\",\r\n  \"idType\": \"{{idType}}\",\r\n  \"idNumber\": \"{{random_string_update}}\",\r\n  \"idVersionNumber\": \"{{random_string_update}}\",\r\n  \"idIssueDate\": \"{{birthday}}\",\r\n  \"idIssueCountry\": \"US\",\r\n  \"idExpiration\": \"{{birthday}}\",\r\n  \"phoneNumber\": \"{{random_string_update}}\",\r\n  \"residentialAddress\": \"{{random_string_update}}\",\r\n  \"residentialStreet\": \"{{random_string_update}}\",\r\n  \"residentialCity\": \"{{random_string_update}}\",\r\n  \"residentialState\": \"{{random_string_update}}\",\r\n  \"residentialPostalCode\": \"{{random_string_update}}\",\r\n  \"residentialCountry\": \"US\",\r\n  \"email\": \"{{random_string_update}}@qq.com\",\r\n  \"industry\": \"{{industry}}\",\r\n  \"jobLevel\": \"{{joblevel}}\",\r\n  \"occupation\": \"{{random_string_update}}\",\r\n  \"currencyPair\": \"{{currencyPair}}\",\r\n  \"fatcaDeclaration\": {{fatcaDeclaration}},\r\n  \"masterAgreementConfirm\": {{masterAgreementConfirm}},\r\n  \"jumioResult\": \"{{random_string_update}}\",\r\n  \"riskRating\": \"{{random_string_update}}\",\r\n  \"worldCheckResult\": \"{{random_string_update}}\",\r\n  \"truliooResult\": \"{{random_string_update}}\",\r\n  \"status\": \"{{random_string_update}}\",\r\n  \"accountPurpose\": \"{{random_string_update}}\",\r\n  \"remark\": \"{{random_string_update}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/demo/retailclients",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retailclients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update retail client(phoneNumber包含字母)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"status=1\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.value).to.eql(1);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"retailClientID\": {{retailClientID_update}},\r\n  \"customerID\": 149619,\r\n  \"referenceID\": \"{{random_string_update}}\",\r\n  \"firstName\": \"{{random_string_update}}\",\r\n  \"lastName\": \"{{random_string_update}}\",\r\n  \"birthday\": \"{{birthday}}\",\r\n  \"gender\": \"{{gender}}\",\r\n  \"title\": \"{{title}}\",\r\n  \"nationality\": \"US\",\r\n  \"idType\": \"{{idType}}\",\r\n  \"idNumber\": \"{{random_string_update}}\",\r\n  \"idVersionNumber\": \"{{random_string_update}}\",\r\n  \"idIssueDate\": \"{{birthday}}\",\r\n  \"idIssueCountry\": \"US\",\r\n  \"idExpiration\": \"{{birthday}}\",\r\n  \"phoneNumber\": \"{{random_string_update}}\",\r\n  \"residentialAddress\": \"{{random_string_update}}\",\r\n  \"residentialStreet\": \"{{random_string_update}}\",\r\n  \"residentialCity\": \"{{random_string_update}}\",\r\n  \"residentialState\": \"{{random_string_update}}\",\r\n  \"residentialPostalCode\": \"{{random_string_update}}\",\r\n  \"residentialCountry\": \"US\",\r\n  \"email\": \"{{random_string_update}}@qq.com\",\r\n  \"industry\": \"{{industry}}\",\r\n  \"jobLevel\": \"{{joblevel}}\",\r\n  \"occupation\": \"{{random_string_update}}\",\r\n  \"currencyPair\": \"{{currencyPair}}\",\r\n  \"fatcaDeclaration\": {{fatcaDeclaration}},\r\n  \"masterAgreementConfirm\": {{masterAgreementConfirm}},\r\n  \"jumioResult\": \"{{random_string_update}}\",\r\n  \"riskRating\": \"{{random_string_update}}\",\r\n  \"worldCheckResult\": \"{{random_string_update}}\",\r\n  \"truliooResult\": \"{{random_string_update}}\",\r\n  \"status\": \"{{random_string_update}}\",\r\n  \"accountPurpose\": \"{{random_string_update}}\",\r\n  \"remark\": \"{{random_string_update}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/demo/retailclients",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retailclients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update retail client(传入枚举值之外的值，调用失败)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"status=1\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"error message-gender\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.errors[0].message).to.eql(\"\\\"gender\\\" only accept the following values: \\\"Male\\\", \\\"Female\\\"\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"error message-title\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.errors[1].message).to.eql(\"\\\"title\\\" only accept the following values: \\\"Mr.\\\", \\\"Mrs.\\\", \\\"Ms.\\\", \\\"Miss\\\"\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"error message-idType\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.errors[2].message).to.eql(\"\\\"idType\\\" only accept the following values: \\\"Driver's License\\\", \\\"Passport\\\", \\\"ID Card\\\"\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"error message-industry\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.errors[3].message).to.eql(\"\\\"industry\\\" only accept the following values: \\\"Military / Weaponry\\\", \\\"Sex-related\\\", \\\"Unregulated / Online Gambling\\\", \\\"Art and Antique Dealer\\\", \\\"Casinos\\\", \\\"Charity\\\", \\\"Equity crowd funding platforms\\\", \\\"Internet-based payment service\\\", \\\"Jewelry, Precious Stone, Metals and Dealing\\\", \\\"Karaoke Centre, Arcade House\\\", \\\"Massage Parlour\\\", \\\"Money Business\\\", \\\"Night Club / Disco\\\", \\\"Racing Industry Transition Agency\\\", \\\"Real Estate / Property Management\\\", \\\"Regulated Casino\\\", \\\"Virtual Asset / Commodity / Currency\\\", \\\"Accountants\\\", \\\"Advisory / Consultant Service\\\", \\\"Auctioneer\\\", \\\"Brokers and custodians\\\", \\\"Cash transport\\\", \\\"Entertainment\\\", \\\"Financial Advisory\\\", \\\"Legal Service\\\", \\\"Managed investment scheme managers\\\", \\\"Money Lender\\\", \\\"Pawn Shop\\\", \\\"Stored value cards\\\", \\\"Trust and company service providers\\\", \\\"Agriculture / Fishing / Forestry\\\", \\\"Arts / Sports / Religious\\\", \\\"Construction / Engineering\\\", \\\"Conveyancers\\\", \\\"Customer Service\\\", \\\"Debt collection\\\", \\\"Education\\\", \\\"Financial leasing\\\", \\\"Food & Beverage / Catering\\\", \\\"Government / Public Utilities\\\", \\\"Import / Export & Trading\\\", \\\"Information Technology\\\", \\\"Insurance\\\", \\\"Investment / Securities\\\", \\\"Manufacturing\\\", \\\"Media / Printing / Publishing\\\", \\\"Medical Service\\\", \\\"Safe deposit boxes\\\", \\\"Self-Employed\\\", \\\"TeleCom / Communication\\\", \\\"Tourism / Hotel / Hospitality\\\", \\\"Transportation / Logistics\\\", \\\"Utilities\\\", \\\"Wholesale / Retail\\\", \\\"Others\\\", \\\"Home Duties\\\", \\\"Retired\\\", \\\"Student\\\", \\\"Unemployed\\\"\");\r",
+									"\r",
+									"\r",
+									"    pm.test(\"error message-jobLevel\", function () {\r",
+									"        var jsonData = pm.response.json();\r",
+									"        pm.expect(jsonData.errors[4].message).to.eql(\"\\\"jobLevel\\\" only accept the following values: \\\"Business Owner / CEO / Chairman / Director\\\", \\\"Senior Manager / Manager\\\", \\\"Team members\\\", \\\"Self-employed\\\", \\\"Not Employed\\\"\");\r",
+									"    });\r",
+									"});\r",
+									" "
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"retailClientID\": {{retailClientID_update}},\r\n  \"customerID\": 149619,\r\n  \"referenceID\": \"{{random_string_update}}\",\r\n  \"firstName\": \"{{random_string_update}}\",\r\n  \"lastName\": \"{{random_string_update}}\",\r\n  \"birthday\": \"{{birthday}}\",\r\n  \"gender\": \"{{random_string_update}}\",\r\n  \"title\": \"{{random_string_update}}\",\r\n  \"nationality\": \"US\",\r\n  \"idType\": \"{{random_string_update}}\",\r\n  \"idNumber\": \"{{random_string_update}}\",\r\n  \"idVersionNumber\": \"{{random_string_update}}\",\r\n  \"idIssueDate\": \"{{birthday}}\",\r\n  \"idIssueCountry\": \"US\",\r\n  \"idExpiration\": \"{{birthday}}\",\r\n  \"phoneNumber\": \"{{random_string_update}}\",\r\n  \"residentialAddress\": \"{{random_string_update}}\",\r\n  \"residentialStreet\": \"{{random_string_update}}\",\r\n  \"residentialCity\": \"{{random_string_update}}\",\r\n  \"residentialState\": \"{{random_string_update}}\",\r\n  \"residentialPostalCode\": \"{{random_string_update}}\",\r\n  \"residentialCountry\": \"US\",\r\n  \"email\": \"{{random_string_update}}@qq.com\",\r\n  \"industry\": \"{{random_string_update}}\",\r\n  \"jobLevel\": \"{{random_string_update}}\",\r\n  \"occupation\": \"{{random_string_update}}\",\r\n  \"currencyPair\": \"{{random_string_update}}\",\r\n  \"fatcaDeclaration\": {{fatcaDeclaration}},\r\n  \"masterAgreementConfirm\": {{masterAgreementConfirm}},\r\n  \"jumioResult\": \"{{random_string_update}}\",\r\n  \"riskRating\": \"{{random_string_update}}\",\r\n  \"worldCheckResult\": \"{{random_string_update}}\",\r\n  \"truliooResult\": \"{{random_string_update}}\",\r\n  \"status\": \"{{random_string_update}}\",\r\n  \"accountPurpose\": \"{{random_string_update}}\",\r\n  \"remark\": \"{{random_string_update}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/demo/retailclients",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retailclients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update retail client(字符串超出边界，调用失败）",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"status=1\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"errors message\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.errors[0].message).to.eql(\"Unknown failure\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"retailClientID\": {{retailClientID_update}},\r\n  \"customerID\": 149619,\r\n  \"referenceID\": \"{{random_string_update}}\",\r\n  \"firstName\": \"{{str_outofrange}}\",\r\n  \"lastName\": \"{{str_outofrange}}\",\r\n  \"birthday\": \"{{birthday}}\",\r\n  \"gender\": \"{{gender}}\",\r\n  \"title\": \"{{title}}\",\r\n  \"nationality\": \"US\",\r\n  \"idType\": \"{{idType}}\",\r\n  \"idNumber\": \"{{random_string_update}}\",\r\n  \"idVersionNumber\": \"{{random_string_update}}\",\r\n  \"idIssueDate\": \"{{birthday}}\",\r\n  \"idIssueCountry\": \"US\",\r\n  \"idExpiration\": \"{{birthday}}\",\r\n  \"phoneNumber\": \"{{random_string_update}}\",\r\n  \"residentialAddress\": \"{{str_outofrange}}\",\r\n  \"residentialStreet\": \"{{str_outofrange}}\",\r\n  \"residentialCity\": \"{{str_outofrange}}\",\r\n  \"residentialState\": \"{{str_outofrange}}\",\r\n  \"residentialPostalCode\": \"{{random_string_update}}\",\r\n  \"residentialCountry\": \"US\",\r\n  \"email\": \"{{random_string_update}}@qq.com\",\r\n  \"industry\": \"{{industry}}\",\r\n  \"jobLevel\": \"{{joblevel}}\",\r\n  \"occupation\": \"{{random_string_update}}\",\r\n  \"currencyPair\": \"{{currencyPair}}\",\r\n  \"fatcaDeclaration\": {{fatcaDeclaration}},\r\n  \"masterAgreementConfirm\": {{masterAgreementConfirm}},\r\n  \"jumioResult\": \"{{random_string_update}}\",\r\n  \"riskRating\": \"{{random_string_update}}\",\r\n  \"worldCheckResult\": \"{{random_string_update}}\",\r\n  \"truliooResult\": \"{{random_string_update}}\",\r\n  \"status\": \"{{random_string_update}}\",\r\n  \"accountPurpose\": \"{{random_string_update}}\",\r\n  \"remark\": \"{{random_string_update}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/demo/retailclients",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retailclients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update retail client(referenceID变更，调用失败)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"status=1\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"error message\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.errors[0].message).to.eql(\"The referenceID cannot be changed\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"retailClientID\": {{retailClientID_update}},\r\n  \"customerID\": 149619,\r\n  \"referenceID\": \"{{random_string}}\",\r\n  \"firstName\": \"{{random_string_update}}\",\r\n  \"lastName\": \"{{random_string_update}}\",\r\n  \"birthday\": \"{{birthday}}\",\r\n  \"gender\": \"{{gender}}\",\r\n  \"title\": \"{{title}}\",\r\n  \"nationality\": \"US\",\r\n  \"idType\": \"{{idType}}\",\r\n  \"idNumber\": \"{{random_string_update}}\",\r\n  \"idVersionNumber\": \"{{random_string_update}}\",\r\n  \"idIssueDate\": \"{{birthday}}\",\r\n  \"idIssueCountry\": \"US\",\r\n  \"idExpiration\": \"{{birthday}}\",\r\n  \"phoneNumber\": \"{{random_string_update}}\",\r\n  \"residentialAddress\": \"{{random_string_update}}\",\r\n  \"residentialStreet\": \"{{random_string_update}}\",\r\n  \"residentialCity\": \"{{random_string_update}}\",\r\n  \"residentialState\": \"{{random_string_update}}\",\r\n  \"residentialPostalCode\": \"{{random_string_update}}\",\r\n  \"residentialCountry\": \"US\",\r\n  \"email\": \"{{random_string_update}}@qq.com\",\r\n  \"industry\": \"{{industry}}\",\r\n  \"jobLevel\": \"{{joblevel}}\",\r\n  \"occupation\": \"{{random_string_update}}\",\r\n  \"currencyPair\": \"{{currencyPair}}\",\r\n  \"fatcaDeclaration\": {{fatcaDeclaration}},\r\n  \"masterAgreementConfirm\": {{masterAgreementConfirm}},\r\n  \"jumioResult\": \"{{random_string_update}}\",\r\n  \"riskRating\": \"{{random_string_update}}\",\r\n  \"worldCheckResult\": \"{{random_string_update}}\",\r\n  \"truliooResult\": \"{{random_string_update}}\",\r\n  \"status\": \"{{random_string_update}}\",\r\n  \"accountPurpose\": \"{{random_string_update}}\",\r\n  \"remark\": \"{{random_string_update}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/demo/retailclients",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retailclients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get retail detail(更新之后再次查询)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//对比JSON字符串\r",
+									"var jsonDataString = JSON.stringify(pm.response.json().data);\r",
+									"var expectData = {\r",
+									"\t\"retailClientID\": pm.environment.get('retailClientID_update'),\r",
+									"\t\"customerID\": 149619,\r",
+									"\t\"referenceID\": pm.environment.get('random_string_update'),\r",
+									"\t\"firstName\": pm.environment.get('random_string_update'),\r",
+									"\t\"lastName\": pm.environment.get('random_string_update'),\r",
+									"\t\"birthday\": pm.environment.get('birthday2'),\r",
+									"\t\"gender\": pm.environment.get('gender'),\r",
+									"\t\"title\": pm.environment.get('title'),\r",
+									"\t\"nationality\": \"US\",\r",
+									"\t\"idType\": pm.environment.get('idType'),\r",
+									"\t\"idNumber\": pm.environment.get('random_string_update'),\r",
+									"\t\"idVersionNumber\": pm.environment.get('random_string_update'),\r",
+									"\t\"idIssueDate\": pm.environment.get('birthday2'),\r",
+									"\t\"idIssueCountry\": \"US\",\r",
+									"\t\"idExpiration\": pm.environment.get('birthday2'),\r",
+									"\t\"phoneNumber\": pm.environment.get('random_string_update'),\r",
+									"\t\"residentialAddress\": pm.environment.get('random_string_update'),\r",
+									"\t\"residentialStreet\":  pm.environment.get('random_string_update'),\r",
+									"\t\"residentialCity\": pm.environment.get('random_string_update'),\r",
+									"\t\"residentialState\": pm.environment.get('random_string_update'),\r",
+									"\t\"residentialPostalCode\": pm.environment.get('random_string_update'),\r",
+									"\t\"residentialCountry\": \"US\",\r",
+									"\t\"email\": pm.environment.get('random_string_update')+\"@qq.com\",\r",
+									"\t\"industry\": pm.environment.get('industry'),\r",
+									"\t\"jobLevel\": pm.environment.get('joblevel'),\r",
+									"\t\"occupation\": pm.environment.get('random_string_update'),\r",
+									"\t\"currencyPair\": pm.environment.get('currencyPair'),\r",
+									"\t\"fatcaDeclaration\": pm.environment.get('fatcaDeclaration'),\r",
+									"\t\"masterAgreementConfirm\": pm.environment.get('masterAgreementConfirm'),\r",
+									"\t\"jumioResult\": pm.environment.get('random_string_update'),\r",
+									"\t\"riskRating\": \"good\",\r",
+									"\t\"worldCheckResult\": \"good\",\r",
+									"\t\"truliooResult\": \"good\",\r",
+									"\t\"status\": \"Pending\",\r",
+									"\t\"remark\": null,\r",
+									"\t\"idCardNumber\": null,\r",
+									"\t\"idIssueState\": null,\r",
+									"\t\"accountPurpose\": pm.environment.get('random_string_update'),\r",
+									"};\r",
+									"\r",
+									"var expectDataString = JSON.stringify(expectData);\r",
+									"pm.test(\"Compare JSON strings\", function () {\r",
+									"    pm.expect(jsonDataString).to.eql(expectDataString);\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/demo/retailclients/getclient?referenceID={{random_string_update}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retailclients",
+								"getclient"
+							],
+							"query": [
+								{
+									"key": "referenceID",
+									"value": "{{random_string_update}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "retail client comment",
+			"item": [
+				{
+					"name": "add retail client comment(必填参数)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"source\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.source).to.eql(\"Client\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"comment\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.comment).to.eql(pm.environment.get(\"random_string\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"retailClientID\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.retailClientID).to.eql(pm.environment.get(\"retailClientID\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"只校验creationTime字段，不校验值\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data).to.have.property(\"creationTime\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"comment\": \"{{random_string}}\" }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/demo/retailclients/{{retailClientID}}/comments",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retailclients",
+								"{{retailClientID}}",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add retail client comment(所有参数)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"source\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.source).to.eql(\"Client\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"comment\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.comment).to.eql(pm.environment.get(\"random_string\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"retailClientID\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.retailClientID).to.eql(pm.environment.get(\"retailClientID\"));\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var randomInteger = Math.floor(Math.random() * 10000000) + 1;\r",
+									"\r",
+									"pm.environment.set(\"randomNumber\", randomInteger);\r",
+									"\r",
+									"var sources = [\"Client\",\"KVB\"];\r",
+									"var source = sources[Math.floor(Math.random() * sources.length)];\r",
+									"pm.environment.set(\"source\",source);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": {{randomNumber}},\r\n  \"retailClientID\": {{retailClientID}},\r\n  \"source\": \"{{source}}\",\r\n  \"comment\": \"{{random_string}}\",\r\n  \"creationTime\": \"2024-07-04 08:27:22.699+0000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/demo/retailclients/{{retailClientID}}/comments",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retailclients",
+								"{{retailClientID}}",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add retail client comment(source=KVB)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"source\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.source).to.eql(\"KVB\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"comment\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.comment).to.eql(pm.environment.get(\"random_string\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"retailClientID\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.retailClientID).to.eql(pm.environment.get(\"retailClientID\"));\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": {{randomNumber}},\r\n  \"retailClientID\": {{retailClientID}},\r\n  \"source\": \"KVB\",\r\n  \"comment\": \"{{random_string}}\",\r\n  \"creationTime\": \"2024-07-04 08:27:22.699+0000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/demo/retailclients/{{retailClientID}}/comments",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retailclients",
+								"{{retailClientID}}",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search retail client comments(不携带任何查询参数)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"offset\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.meta.offset).to.eql(0);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"limit\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.meta.limit).to.eql(30);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"total\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.meta.total).to.eql(jsonData.data.length);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/demo/retailclients/{{retailClientID}}/comments",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retailclients",
+								"{{retailClientID}}",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search retail client comments(source=KVB)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"data.length\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.length).to.eql(0);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/demo/retailclients/{{retailClientID}}/comments?source=KVB",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retailclients",
+								"{{retailClientID}}",
+								"comments"
+							],
+							"query": [
+								{
+									"key": "source",
+									"value": "KVB"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search retail client comments(source=Client)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"status=0\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(0);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/demo/retailclients/{{retailClientID}}/comments?source=Client",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retailclients",
+								"{{retailClientID}}",
+								"comments"
+							],
+							"query": [
+								{
+									"key": "source",
+									"value": "Client"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search retail client comments(source传入随机数)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"offset=0\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.meta.offset).to.eql(0);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"limit=30\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.meta.limit).to.eql(30);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"total=0\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.meta.total).to.eql(0);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/demo/retailclients/{{retailClientID}}/comments?source={{random_string}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retailclients",
+								"{{retailClientID}}",
+								"comments"
+							],
+							"query": [
+								{
+									"key": "source",
+									"value": "{{random_string}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search retail client comments(offset = 1,limit=3)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"data.length\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.length).to.eql(3);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"offset\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.meta.offset).to.eql(1);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/demo/retailclients/{{retailClientID}}/comments?offset=1&limit=3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retailclients",
+								"{{retailClientID}}",
+								"comments"
+							],
+							"query": [
+								{
+									"key": "offset",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search retail client comments(offset,limit传入非整数)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"status=1\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(1);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/demo/retailclients/{{retailClientID}}/comments?offset={{random_string}}&limit={{random_string}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retailclients",
+								"{{retailClientID}}",
+								"comments"
+							],
+							"query": [
+								{
+									"key": "offset",
+									"value": "{{random_string}}"
+								},
+								{
+									"key": "limit",
+									"value": "{{random_string}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "document detail",
+			"item": [
+				{
+					"name": "upload retail client document(category在5个值之间随机,携带所有值)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"retailClientID\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.retailClientID).to.eql(pm.environment.get(\"retailClientID\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"category\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.category).to.eql(pm.environment.get(\"category\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"fileName\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.fileName).to.eql(pm.environment.get(\"random_string\"));\r",
+									"});\r",
+									"\r",
+									"//存储id\r",
+									"pm.environment.set(\"id_document\",pm.response.json().data.id);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var categorys = [\"Address Proof\",\"ID Photo\",\"ID Supplement Document\",\"Source of Fund\",\"Others\"];\r",
+									"var category = categorys[Math.floor(Math.random() * categorys.length)];\r",
+									"pm.environment.set(\"category\",category);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"{{random_string}}\",\r\n  \"retailClientID\": {{retailClientID}},\r\n  \"category\": \"{{category}}\",\r\n  \"fileName\": \"{{random_string}}\",\r\n  \"contentBase64\": \"{{random_string}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/demo/retailclients/{{retailClientID}}/documents/upload",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retailclients",
+								"{{retailClientID}}",
+								"documents",
+								"upload"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "upload retail client document(category在5个值之间随机,不携带id)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"retailClientID\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.retailClientID).to.eql(pm.environment.get(\"retailClientID\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"category\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.category).to.eql(pm.environment.get(\"category\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"fileName\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.fileName).to.eql(pm.environment.get(\"random_string\"));\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var categorys = [\"Address Proof\",\"ID Photo\",\"ID Supplement Document\",\"Source of Fund\",\"Others\"];\r",
+									"var category = categorys[Math.floor(Math.random() * categorys.length)];\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"retailClientID\": {{retailClientID}},\r\n  \"category\": \"{{category}}\",\r\n  \"fileName\": \"{{random_string}}\",\r\n  \"contentBase64\": \"{{random_string}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/demo/retailclients/{{retailClientID}}/documents/upload",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retailclients",
+								"{{retailClientID}}",
+								"documents",
+								"upload"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "upload retail client document(filename不携带扩展类型)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var categorys = [\"Address Proof\",\"ID Photo\",\"ID Supplement Document\",\"Source of Fund\",\"Others\"];\r",
+									"var category = categorys[Math.floor(Math.random() * categorys.length)];"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"status=1\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(1);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"retailClientID\": {{retailClientID}},\r\n  \"category\": \"{{category}}\",\r\n  \"fileName\": \"{{random_string_1000}}\",\r\n  \"contentBase64\": \"{{random_string}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/demo/retailclients/{{retailClientID}}/documents/upload",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retailclients",
+								"{{retailClientID}}",
+								"documents",
+								"upload"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "upload retail client document(category=test,调用失败)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"status=1\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"error message\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.errors[0].message).to.eql(\"Invalid category\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"123\",\r\n  \"retailClientID\": {{retailClientID}},\r\n  \"category\": \"test\",\r\n  \"fileName\": \"{{random_string}}\",\r\n  \"contentBase64\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/demo/retailclients/{{retailClientID}}/documents/upload",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retailclients",
+								"{{retailClientID}}",
+								"documents",
+								"upload"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search retail client documents(不携带查询参数)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"errors length\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.errors.length).to.eql(0);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"offset\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.meta.offset).to.eql(0);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"limit\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.meta.limit).to.eql(30);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/demo/retailclients/{{retailClientID}}/documents",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retailclients",
+								"{{retailClientID}}",
+								"documents"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search retail client documents(limit=3,offset=1)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"offset\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.meta.offset).to.eql(1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"limit\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.meta.limit).to.eql(3);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/demo/retailclients/{{retailClientID}}/documents?offset=1&limit=3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retailclients",
+								"{{retailClientID}}",
+								"documents"
+							],
+							"query": [
+								{
+									"key": "offset",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search retail client documents(limit=3,offset传入非整数)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"status=1\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(1);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/demo/retailclients/{{retailClientID}}/documents?offset={{random_string}}&limit={{random_string}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retailclients",
+								"{{retailClientID}}",
+								"documents"
+							],
+							"query": [
+								{
+									"key": "offset",
+									"value": "{{random_string}}"
+								},
+								{
+									"key": "limit",
+									"value": "{{random_string}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "download retail client document",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"retailClientID\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.retailClientID).to.eql(pm.environment.get(\"retailClientID\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"category\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.category).to.eql(pm.environment.get(\"category\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"fileName\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.fileName).to.eql(pm.environment.get(\"random_string\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"contentBase64\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.contentBase64).to.eql(pm.environment.get(\"contentBase64\"));\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/demo/retailclients/{{retailClientID}}/documents/download?id={{id_document}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retailclients",
+								"{{retailClientID}}",
+								"documents",
+								"download"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "{{id_document}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "retail deal",
+			"item": [
+				{
+					"name": "get quote(tenor传入非整数，调用失败)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"status=1\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(1);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/demo/retailquote?tenor={{random_string}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retailquote"
+							],
+							"query": [
+								{
+									"key": "tenor",
+									"value": "{{random_string}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get quote(symbolID传入非货币对，调用失败)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"status=1\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"errors message\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.errors[0].message).to.eql(\"Symbol not exist\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/demo/retailquote?symbolID=ABCDEF",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retailquote"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "symbolID",
+									"value": "ABCDEF"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get quote(tenor=2)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"errors=[]\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.errors).to.eql([]);\r",
+									"});\r",
+									"\r",
+									"//存储bid,ask,token\r",
+									"pm.environment.set(\"bid\",pm.response.json().data.bid);\r",
+									"pm.environment.set(\"ask\",pm.response.json().data.ask);\r",
+									"pm.environment.set(\"token_quote\",pm.response.json().data.token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/demo/retailquote?symbolID=HKDCNH&tenor=2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retailquote"
+							],
+							"query": [
+								{
+									"key": "symbolID",
+									"value": "HKDCNH"
+								},
+								{
+									"key": "tenor",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get quote(tenor=1)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"symbolId\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.symbolId).to.eql(\"HKDCNH\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/demo/retailquote?symbolID=HKDCNH&tenor=1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retailquote"
+							],
+							"query": [
+								{
+									"key": "symbolID",
+									"value": "HKDCNH"
+								},
+								{
+									"key": "tenor",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get quote(tenor=0)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//获取小时，超过17点获取汇率失败\r",
+									"var now = new Date();\r",
+									"var hours = now.getUTCHours().toString().padStart(2,'0');\r",
+									"if(hours == \"09\"){\r",
+									"    pm.test(\"errors message\", function () {\r",
+									"        var jsonData = pm.response.json();\r",
+									"        pm.expect(jsonData.errors[0]. message).to.eql(\"Trade T+0 is not allowed after HKT 17:00\");\r",
+									"    });\r",
+									"}else{\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"symbolId\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.symbolId).to.eql(\"HKDCNH\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"bid,ask,sourceTime\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data).to.have.property(\"bid\");\r",
+									"    pm.expect(jsonData.data).to.have.property(\"ask\");\r",
+									"    pm.expect(jsonData.data).to.have.property(\"sourceTime\");\r",
+									"\r",
+									"});\r",
+									"\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/demo/retailquote?symbolID=HKDCNH&tenor=0",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retailquote"
+							],
+							"query": [
+								{
+									"key": "symbolID",
+									"value": "HKDCNH"
+								},
+								{
+									"key": "tenor",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get quote(tenor=3)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"message\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.errors[0].message).to.eql(\"Invalid System Parameters\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/demo/retailquote?symbolID=HKDCNH&tenor=3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retailquote"
+							],
+							"query": [
+								{
+									"key": "symbolID",
+									"value": "HKDCNH"
+								},
+								{
+									"key": "tenor",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get quote(不填tenor,默认tenor=2)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"symbolId\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.symbolId).to.eql(\"HKDCNH\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"bid,ask,sourceTime\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data).to.have.property(\"bid\");\r",
+									"    pm.expect(jsonData.data).to.have.property(\"ask\");\r",
+									"    pm.expect(jsonData.data).to.have.property(\"sourceTime\");\r",
+									"\r",
+									"});\r",
+									"\r",
+									"//存储bid,ask,token\r",
+									"pm.environment.set(\"bid\",pm.response.json().data.bid);\r",
+									"pm.environment.set(\"ask\",pm.response.json().data.ask);\r",
+									"pm.environment.set(\"token_quote\",pm.response.json().data.token);\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/demo/retailquote?symbolID=HKDCNH",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retailquote"
+							],
+							"query": [
+								{
+									"key": "symbolID",
+									"value": "HKDCNH"
+								},
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "place retail deal with the token（ccy1）",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"buyCcy\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.buyCcy).to.eql(\"HKD\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"buyAmount\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    var buyAmount = jsonData.data.buyAmount+\"\";\r",
+									"    if(buyAmount.split(\".\")[1].length ==1){\r",
+									"        buyAmount+='0';\r",
+									"    }\r",
+									"    pm.expect(buyAmount).to.eql(pm.environment.get(\"randomNum\").toFixed(2));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"sellCcy\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.sellCcy).to.eql(\"CNH\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"sellAmount\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    var amount = (jsonData.data.sellAmount+'');\r",
+									"    if(amount.split(\".\")[1].length==1){\r",
+									"        amount +='0';\r",
+									"    }\r",
+									"    var excepct_amount = (pm.environment.get(\"ask\") * pm.environment.get(\"randomNum\")+\"\").toString().padStart(2,'0');\r",
+									"    excepct_amount = Number(excepct_amount).toFixed(2);\r",
+									"    pm.expect(amount).to.eql(excepct_amount);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"contractRate\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.contractRate).to.eql(pm.environment.get(\"ask\"));\r",
+									"});\r",
+									"\r",
+									"//存储retailDealID\r",
+									"pm.environment.set(\"retailDealID_ask\",pm.response.json().data.retailDealID);\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var randomNum = Math.random()*1000;\r",
+									"pm.environment.set(\"randomNum\",randomNum);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"referenceID\": \"{{random_string}}\",\r\n  \"buyCcy\": \"HKD\",\r\n  \"buyAmount\": {{randomNum}},\r\n  \"sellCcy\":\"CNH\",\r\n  \"contractRate\":{{ask}},\r\n  \"clientInfo\": {\r\n    \"name\": \"{{random_string}}\",\r\n    \"referenceID\": \"{{random_string}}\",\r\n    \"individualClient\": {\r\n      \"firstName\": \"{{random_string}}\",\r\n      \"lastName\": \"{{random_string}}\",\r\n      \"title\": \"{{title}}\",\r\n      \"residentialAddress\": \"{{random_string}}\",\r\n      \"residentialStreet\": \"{{random_string}}\",\r\n      \"residentialCity\": \"{{random_string}}\",\r\n      \"residentialState\": \"{{random_string}}\",\r\n      \"residentialPostalCode\": \"{{random_string}}\",\r\n      \"residentialCountry\": \"NZ\",\r\n      \"relationship\": \"{{random_string}}\",\r\n      \"idType\": \"{{idType}}\",\r\n      \"idNumber\": \"{{random_string}}\",\r\n      \"issueCountry\": \"NZ\"\r\n    },\r\n    \"corporateClient\": {\r\n      \"registrationNo\": \"{{random_string}}\",\r\n      \"address\": \"{{random_string}}\",\r\n      \"street\": \"{{random_string}}\",\r\n      \"city\": \"{{random_string}}\",\r\n      \"state\": \"{{random_string}}\",\r\n      \"postalCode\": \"{{random_string}}\",\r\n      \"country\": \"{{random_string}}\",\r\n      \"relationship\": \"{{random_string}}\",\r\n      \"idType\": \"{{random_string}}\",\r\n      \"idNumber\": \"{{random_string}}\",\r\n      \"issueCountry\": \"{{random_string}}\"\r\n    }\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/demo/retaildeals/{{token_quote}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retaildeals",
+								"{{token_quote}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "place retail deal with the token（ccy2)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"buyCcy\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.buyCcy).to.eql(\"CNH\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"buyAmount\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.buyAmount).to.eql(101);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"sellCcy\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.sellCcy).to.eql(\"HKD\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"sellAmount\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    var amount = jsonData.data.sellAmount+'';\r",
+									"    if(amount.split(\".\")[1].length ==1){\r",
+									"        amount+='0';\r",
+									"    }\r",
+									"    var excepct_amount = (101 / pm.environment.get(\"bid\")).toFixed(2);\r",
+									"    pm.expect(amount).to.eql(excepct_amount);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"contractRate\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.contractRate).to.eql(pm.environment.get(\"bid\"));\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"referenceID\": \"{{random_string}}\",\r\n  \"buyCcy\": \"CNH\",\r\n  \"buyAmount\": 101,\r\n  \"sellCcy\":\"HKD\",\r\n  \"contractRate\":{{bid}},\r\n  \"clientInfo\": {\r\n    \"name\": \"wu\",\r\n    \"referenceID\": \"{{random_string}}\",\r\n    \"individualClient\": {\r\n      \"firstName\": \"wu\",\r\n      \"lastName\": \"liehao\",\r\n      \"title\": \"Miss\",\r\n      \"residentialAddress\": \"50 TEDT DRIVE AUCKLAND New Zealand\",\r\n      \"residentialStreet\": \"50 TEST DRIVE\",\r\n      \"residentialCity\": \"AUCKLAND\",\r\n      \"residentialState\": \"AUCKLAND\",\r\n      \"residentialPostalCode\": \"2019\",\r\n      \"residentialCountry\": \"NZ\",\r\n      \"relationship\": \"string\",\r\n      \"idType\": \"Driver's License\",\r\n      \"idNumber\": \"AB123456\",\r\n      \"issueCountry\": \"NZ\"\r\n    },\r\n    \"corporateClient\": {\r\n      \"registrationNo\": \"123456\",\r\n      \"address\": \"string\",\r\n      \"street\": \"string\",\r\n      \"city\": \"string\",\r\n      \"state\": \"string\",\r\n      \"postalCode\": \"string\",\r\n      \"country\": \"string\",\r\n      \"relationship\": \"string\",\r\n      \"idType\": \"string\",\r\n      \"idNumber\": \"string\",\r\n      \"issueCountry\": \"string\"\r\n    }\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/demo/retaildeals/{{token_quote}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retaildeals",
+								"{{token_quote}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update retail deal priority(priority=true)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"retailDealID\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.retailDealID).to.eql(pm.environment.get(\"retailDealID_ask\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"referenceID\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.referenceID).to.eql(pm.environment.get(\"random_string\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"buyCcy\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.buyCcy).to.eql(\"HKD\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"buyAmount\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    var buyAmount = jsonData.data.buyAmount+'';\r",
+									"    if(buyAmount.split(\".\")[1].length ==1){\r",
+									"        buyAmount+='0'\r",
+									"    }\r",
+									"    pm.expect(buyAmount).to.eql(pm.environment.get(\"randomNum\").toFixed(2));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"sellCcy\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.sellCcy).to.eql(\"CNH\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"sellAmount\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    var sellAmount = jsonData.data.sellAmount+'';\r",
+									"    if(sellAmount.split(\".\")[1].length == 1){\r",
+									"        sellAmount+='0';\r",
+									"    }\r",
+									"    pm.expect(sellAmount).to.eql((pm.environment.get(\"ask\") * pm.environment.get(\"randomNum\")).toFixed(2));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"highPriority\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.highPriority).to.eql(true);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/demo/retaildeals/{{retailDealID_ask}}/setPriority?highPriority=true",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retaildeals",
+								"{{retailDealID_ask}}",
+								"setPriority"
+							],
+							"query": [
+								{
+									"key": "highPriority",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update retail deal priority(priority=false)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"retailDealID\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.retailDealID).to.eql(pm.environment.get(\"retailDealID_ask\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"referenceID\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.referenceID).to.eql(pm.environment.get(\"random_string\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"buyCcy\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.buyCcy).to.eql(\"HKD\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"sellCcy\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.sellCcy).to.eql(\"CNH\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"highPriority\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.highPriority).to.eql(false);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/demo/retaildeals/{{retailDealID_ask}}/setPriority?highPriority=false",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retaildeals",
+								"{{retailDealID_ask}}",
+								"setPriority"
+							],
+							"query": [
+								{
+									"key": "highPriority",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update retail deal priority(priority=非布尔值)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"status=1\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(1);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/demo/retaildeals/{{retailDealID_ask}}/setPriority?highPriority={{random_string}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"demo",
+								"retaildeals",
+								"{{retailDealID_ask}}",
+								"setPriority"
+							],
+							"query": [
+								{
+									"key": "highPriority",
+									"value": "{{random_string}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

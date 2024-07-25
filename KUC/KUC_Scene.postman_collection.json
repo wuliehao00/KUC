@@ -1,0 +1,3156 @@
+{
+	"info": {
+		"_postman_id": "ce9063b9-0955-409d-8c33-669d7b4644b3",
+		"name": "KUC_Scene",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33400951",
+		"_collection_link": "https://galactic-trinity-367893.postman.co/workspace/KVBAUTOTest-Workspace~c8b8b2ef-9830-40ee-85c1-4f015dd709f3/collection/33400951-ce9063b9-0955-409d-8c33-669d7b4644b3?action=share&source=collection_link&creator=33400951"
+	},
+	"item": [
+		{
+			"name": "验证充值金额正常",
+			"item": [
+				{
+					"name": "鉴权",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var json_obj = JSON.parse(responseBody);\r",
+									"pm.environment.set(\"token\", json_obj.token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": \"40127664\",\r\n  \"apiKey\": \"se20Y1PUupUVk-hbQBsFfqf7bzZn1-3r0Q-bikbC\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/security/v2/auth/authenticate",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"security",
+								"v2",
+								"auth",
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "查询账户余额",
+			"item": [
+				{
+					"name": "查询账户余额（不携带货币参数）",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"status=0\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(0);\r",
+									"});\r",
+									"\r",
+									"var currencys = [\"HKD\",\"USD\",\"GBP\",\"EUR\",\"AUD\"];\r",
+									"var currency  = currencys[Math.floor(Math.random() * currencys.length)];\r",
+									"pm.test(\"Body matches currency\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(currency);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/kuc/v2/customer/balance",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"kuc",
+								"v2",
+								"customer",
+								"balance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "查询账户余额（携带指定货币以外的值）",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"status=1\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"message\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.errors[0].message).to.eql(\"Invalid value for currencyCode\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/kuc/v2/customer/balance?currencyCode=MYR",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"kuc",
+								"v2",
+								"customer",
+								"balance"
+							],
+							"query": [
+								{
+									"key": "currencyCode",
+									"value": "MYR"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "查询账户余额（携带指定货币）",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"status=0\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(0);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"currencyCode\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data[0].currencyCode).to.eql(pm.environment.get(\"currencyCode\"));\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var currencys = [\"HKD\",\"USD\",\"GBP\",\"EUR\",\"AUD\"];\r",
+									"var currency  = currencys[Math.floor(Math.random() * currencys.length)];\r",
+									"\r",
+									"pm.environment.set(\"currencyCode\",currency);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/kuc/v2/customer/balance?currencyCode={{currencyCode}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"kuc",
+								"v2",
+								"customer",
+								"balance"
+							],
+							"query": [
+								{
+									"key": "currencyCode",
+									"value": "{{currencyCode}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "持卡人",
+			"item": [
+				{
+					"name": "创建持卡人(正常场景,acceptTnc=true)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// 生成随机字符串的函数\r",
+									"function generateRandomString(length) {\r",
+									"  var result           = '';\r",
+									"  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';\r",
+									"  var charactersLength = characters.length;\r",
+									"  for (var i = 0; i < length; i++) {\r",
+									"    result += characters.charAt(Math.floor(Math.random() * charactersLength));\r",
+									"  }\r",
+									"  return result;\r",
+									"}\r",
+									"\r",
+									"function generateRandomString2(length) {\r",
+									"  var result           = '';\r",
+									"  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';\r",
+									"  var charactersLength = characters.length;\r",
+									"  for (var i = 0; i < length; i++) {\r",
+									"    result += characters.charAt(Math.floor(Math.random() * charactersLength));\r",
+									"  }\r",
+									"  return result;\r",
+									"}\r",
+									" \r",
+									"// 设置一个环境变量，名为random_string，值为随机生成的字符串\r",
+									"pm.environment.set(\"random_string\", generateRandomString(10));\r",
+									"pm.environment.set(\"random_string_onlyCharacter\", generateRandomString2(10));\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"status=0\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(0);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"firstName\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.firstName).to.eql(pm.environment.get(\"random_string_onlyCharacter\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"lastName\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.lastName).to.eql(pm.environment.get(\"random_string_onlyCharacter\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"email\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.email).to.eql((\"wuliehaokvb_\"+pm.environment.get(\"random_string\")+\"@2925.com\").toLowerCase());\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.environment.set(\"cardHolderID\",jsonData.data.cardHolderID);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"wuliehaokvb_{{random_string}}@2925.com\",\r\n  \"firstName\": \"{{random_string_onlyCharacter}}\",\r\n  \"lastName\": \"{{random_string_onlyCharacter}}\",\r\n  \"password\": \"{{random_string}}_ABC8\",\r\n  \"acceptTnc\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/kuc/v2/cardholders",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"kuc",
+								"v2",
+								"cardholders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "创建持卡人(password长度小于7或者大于30,不包含大写字母)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"status=1\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"errors message\", function () {\r",
+									"    var message = pm.response.json().errors[0].message;\r",
+									"    if(message.includes(\"between\")){\r",
+									"        pm.expect(message).to.eql(\"Password must be between 8 and 30 characters\");\r",
+									"}else{\r",
+									"        pm.expect(message).to.eql(\"Password must contain at least one lowercase letter, one uppercase letter, and one number\");\r",
+									"}\r",
+									"});\r",
+									"    \r",
+									"    "
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var passwords = [\"abcD12\",\"abcdefghijklmnopQrstuvwxyz12345\",\"12345678abc\"];\r",
+									"var password  = passwords[Math.floor(Math.random() * passwords.length)];\r",
+									"pm.environment.set(\"password_abnormal\",password);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"wuliehaokvb_{{$guid}}@2925.com\",\r\n  \"firstName\": \"{{random_string_onlyCharacter}}\",\r\n  \"lastName\": \"{{random_string_onlyCharacter}}\",\r\n  \"password\": \"{{password_abnormal}}\",\r\n  \"acceptTnc\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/kuc/v2/cardholders",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"kuc",
+								"v2",
+								"cardholders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "创建持卡人(firstName,lastName包含数字，特殊符号)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"status=1\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"errors message\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    var message = jsonData.errors[0].message;\r",
+									"    if(message.includes(\"First\")){\r",
+									"        pm.expect(message).to.eql(\"First name must only contain alphabetical characters\");\r",
+									"    }else{\r",
+									"        pm.expect(message).to.eql(\"Last name must only contain alphabetical characters\");\r",
+									"    }\r",
+									"    \r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"wuliehaokvb_{{random_string}}@2925.com\",\r\n  \"firstName\": \"{{random_string}}_0@\",\r\n  \"lastName\": \"{{random_string}}_0@\",\r\n  \"password\": \"{{random_string}}_ABC8\",\r\n  \"acceptTnc\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/kuc/v2/cardholders",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"kuc",
+								"v2",
+								"cardholders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "创建持卡人(firstName,lastName超过50字符)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"status=1\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"errors message\", function () {\r",
+									"    var message = pm.response.json().errors[0].message;\r",
+									"    if(message.includes(\"Last\")){\r",
+									"        pm.expect(message).to.eql(\"Last name must be less than or equal to 50 characters\");\r",
+									"    }else{\r",
+									"        pm.expect(message).to.eql(\"First name must be less than or equal to 50 characters\");\r",
+									"    }\r",
+									"    \r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"wuliehaokvb_{{$guid}}@2925.com\",\r\n  \"firstName\": \"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\r\n  \"lastName\": \"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\r\n  \"password\": \"{{random_string}}_ABC8\",\r\n  \"acceptTnc\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/kuc/v2/cardholders",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"kuc",
+								"v2",
+								"cardholders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "创建持卡人(acceptTnc=false)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"status=1\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"error message\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.errors[0].message).to.eql(\"Terms and conditions must be accepted\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"wuliehaokvb_{{$guid}}@2925.com\",\r\n  \"firstName\": \"{{random_string_onlyCharacter}}\",\r\n  \"lastName\": \"{{random_string_onlyCharacter}}\",\r\n  \"password\": \"{{random_string}}_ABC8\",\r\n  \"acceptTnc\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/kuc/v2/cardholders",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"kuc",
+								"v2",
+								"cardholders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "创建持卡人(email重复)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"status=1\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"error message\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.errors[0].message).to.eql(\"The email is not accepted\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"wuliehaokvb_{{random_string}}@2925.com\",\r\n  \"firstName\": \"{{random_string_onlyCharacter}}\",\r\n  \"lastName\": \"{{random_string_onlyCharacter}}\",\r\n  \"password\": \"{{random_string}}_ABC8\",\r\n  \"acceptTnc\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/kuc/v2/cardholders",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"kuc",
+								"v2",
+								"cardholders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "获取持卡人详情(正常流程)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"status=0\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(0);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"cardHolderID\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.cardHolderID).to.eql(pm.environment.get(\"cardHolderID\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"firstName\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.firstName).to.eql(pm.environment.get(\"random_string_onlyCharacter\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"lastName\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.lastName).to.eql(pm.environment.get(\"random_string_onlyCharacter\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"email\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.email).to.eql((\"wuliehaokvb_\"+pm.environment.get(\"random_string\")+\"@2925.com\").toLowerCase());\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/kuc/v2/cardholders/{{cardHolderID}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"kuc",
+								"v2",
+								"cardholders",
+								"{{cardHolderID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "创建持卡人卡片(11种货币随机,携带全部参数)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"status\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(0);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"localCurrency\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.localCurrency).to.eql(pm.environment.get(\"currencyCode\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"cardHolderID\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.cardHolderID).to.eql(pm.environment.get(\"cardHolderID\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"activated\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.activated).to.eql(true);\r",
+									"});\r",
+									"\r",
+									"//存储卡片id\r",
+									"var Object_json = JSON.parse(responseBody);\r",
+									"\r",
+									"pm.environment.set(\"cardLogID\",Object_json.data.cardLogID);\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var skipEmails = [true,false];\r",
+									"var skipEmail  = skipEmails[Math.floor(Math.random() * skipEmails.length)];\r",
+									"pm.environment.set(\"skipEmail\",skipEmail);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cardHolderID\": \"{{cardHolderID}}\",\r\n  \"currency\": \"{{currencyCode}}\",\r\n  \"skipEmail\":{{skipEmail}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/kuc/v2/cards",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"kuc",
+								"v2",
+								"cards"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "创建持卡人卡片(currency=MYR)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"status=1\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"errors message\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.errors[0].message).to.eql(\"Invalid input 'MYR' for enum CardCurrency\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var skipEmails = [true,false];\r",
+									"var skipEmail  = skipEmails[Math.floor(Math.random() * skipEmails.length)];\r",
+									"pm.environment.set(\"skipEmail\",skipEmail);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cardHolderID\": \"{{cardHolderID}}\",\r\n  \"currency\": \"MYR\",\r\n  \"skipEmail\":{{skipEmail}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/kuc/v2/cards",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"kuc",
+								"v2",
+								"cards"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "创建持卡人卡片(cardHolderID不存在)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"status=1\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"errors message\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.errors[0].message).to.eql(\"Record not found\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var skipEmails = [true,false];\r",
+									"var skipEmail  = skipEmails[Math.floor(Math.random() * skipEmails.length)];\r",
+									"pm.environment.set(\"skipEmail\",skipEmail);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cardHolderID\": \"{{$guid}}\",\r\n  \"currency\": \"{{currencyCode}}\",\r\n  \"skipEmail\":{{skipEmail}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/kuc/v2/cards",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"kuc",
+								"v2",
+								"cards"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "设置卡片余额(正常场景)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"cardLogId\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.cardLogId).to.eql(pm.environment.get(\"cardLogID\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"currentCreditBalance\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.currentCreditBalance).to.eql(pm.environment.get(\"randomAmount\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"currency\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.currency).to.eql(pm.environment.get(\"currencyCode\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"reqBy\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.reqBy).to.eql(pm.environment.get(\"random_string\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"reqAmount\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.reqAmount).to.eql(pm.environment.get(\"randomAmount\"));\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var randomAmount = Math.random()*1000;\r",
+									"pm.environment.set(\"randomAmount\",randomAmount);\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"reqId\": \"{{$guid}}\",\r\n  \"currencyCode\": \"{{currencyCode}}\",\r\n  \"amount\": {{randomAmount}},\r\n  \"requestedBy\": \"{{random_string}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/kuc/v2/cards/{{cardLogID}}/credit",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"kuc",
+								"v2",
+								"cards",
+								"{{cardLogID}}",
+								"credit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "设置卡片余额(currency与cardLogID不一致)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"status=1\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"errors message\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Currency mismatch\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"reqId\": \"{{$guid}}\",\r\n  \"currencyCode\": \"JPY\",\r\n  \"amount\": {{randomAmount}},\r\n  \"requestedBy\": \"{{random_string}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/kuc/v2/cards/{{cardLogID}}/credit",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"kuc",
+								"v2",
+								"cards",
+								"{{cardLogID}}",
+								"credit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "设置卡片余额(currency=MYR)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"status=1\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"errors message\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.errors[0].message).to.eql(\"Invalid input 'MYR' for enum CardCurrency\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"reqId\": \"{{$guid}}\",\r\n  \"currencyCode\": \"MYR\",\r\n  \"amount\": {{randomAmount}},\r\n  \"requestedBy\": \"{{random_string}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/kuc/v2/cards/{{cardLogID}}/credit",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"kuc",
+								"v2",
+								"cards",
+								"{{cardLogID}}",
+								"credit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "查询卡片余额(正常场景)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"status=0\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(0);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"cardId\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.cardId).to.eql(pm.environment.get(\"cardLogID\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"balance\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.balance).to.eql(pm.environment.get(\"randomAmount\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"currencyCode\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.currencyCode).to.eql(pm.environment.get(\"currencyCode\"));\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/kuc/v2/cards/{{cardLogID}}/credit",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"kuc",
+								"v2",
+								"cards",
+								"{{cardLogID}}",
+								"credit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "查询卡片余额(卡片不存在)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"message\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.errors[0].message).to.eql(\"Exception: triplink card not found by id: 11111111111111111111111111111111111111111111111111111\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/kuc/v2/cards/11111111111111111111111111111111111111111111111111111/credit",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"kuc",
+								"v2",
+								"cards",
+								"11111111111111111111111111111111111111111111111111111",
+								"credit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "获取持卡人列表(不携带参数)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"status=0\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(0);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/kuc/v2/cardholders",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"kuc",
+								"v2",
+								"cardholders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "获取持卡人列表(空数据)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"status=0\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(0);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"data=[]\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.length).to.eql(0);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/kuc/v2/cardholders?firstName={{random_string_onlyCharacter}}&lastName=abcde",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"kuc",
+								"v2",
+								"cardholders"
+							],
+							"query": [
+								{
+									"key": "firstName",
+									"value": "{{random_string_onlyCharacter}}"
+								},
+								{
+									"key": "lastName",
+									"value": "abcde"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "获取持卡人列表(通过email查询)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"status=0\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(0);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"cardHolderID\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data[0].cardHolderID).to.eql(pm.environment.get(\"cardHolderID\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"firstName\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data[0].firstName).to.eql(pm.environment.get(\"random_string_onlyCharacter\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"lastName\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data[0].lastName).to.eql(pm.environment.get(\"random_string_onlyCharacter\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"email\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data[0].email).to.eql((\"wuliehaokvb_\"+pm.environment.get(\"random_string\")+\"@2925.com\").toLowerCase());\r",
+									"});\r",
+									"\r",
+									"pm.test(\"length=1\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.length).to.eql(1);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/kuc/v2/cardholders?email=wuliehaokvb_{{random_string}}@2925.com",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"kuc",
+								"v2",
+								"cardholders"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "wuliehaokvb_{{random_string}}@2925.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "获取持卡人列表(通过firstName,lastName查询)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"status=0\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(0);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"cardHolderID\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data[0].cardHolderID).to.eql(pm.environment.get(\"cardHolderID\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"firstName\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data[0].firstName).to.eql(pm.environment.get(\"random_string_onlyCharacter\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"lastName\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data[0].lastName).to.eql(pm.environment.get(\"random_string_onlyCharacter\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"email\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data[0].email).to.eql((\"wuliehaokvb_\"+pm.environment.get(\"random_string\")+\"@2925.com\").toLowerCase());\r",
+									"});\r",
+									"\r",
+									"pm.test(\"length=1\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.length).to.eql(1);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/kuc/v2/cardholders?firstName={{random_string_onlyCharacter}}&lastName={{random_string_onlyCharacter}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"kuc",
+								"v2",
+								"cardholders"
+							],
+							"query": [
+								{
+									"key": "firstName",
+									"value": "{{random_string_onlyCharacter}}"
+								},
+								{
+									"key": "lastName",
+									"value": "{{random_string_onlyCharacter}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "更新卡片最大额度",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"data\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data).to.eql(\"Updated\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/kuc/v2/cards/{{cardLogID}}?maxAuthAmount={{randomAmount}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"kuc",
+								"v2",
+								"cards",
+								"{{cardLogID}}"
+							],
+							"query": [
+								{
+									"key": "maxAuthAmount",
+									"value": "{{randomAmount}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get card details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"maxAuthAmt\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.maxAuthAmt.toFixed(2)).to.eql(pm.environment.get(\"randomAmount\").toFixed(2))\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/kuc/v2/cards/{{cardLogID}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"kuc",
+								"v2",
+								"cards",
+								"{{cardLogID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search card credit history(不携带参数)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"status = 0\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(0);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/kuc/v2/cards/{{cardLogID}}/credit-history",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"kuc",
+								"v2",
+								"cards",
+								"{{cardLogID}}",
+								"credit-history"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search card credit history(日期超过三个月)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"status = 2\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(2);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"errors\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.errors[0].message).to.eql(\"The searching period should be within 90 days\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/kuc/v2/cards/{{cardLogID}}/credit-history?fromDate=2024-04-01&toDate=2024-07-16",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"kuc",
+								"v2",
+								"cards",
+								"{{cardLogID}}",
+								"credit-history"
+							],
+							"query": [
+								{
+									"key": "fromDate",
+									"value": "2024-04-01"
+								},
+								{
+									"key": "toDate",
+									"value": "2024-07-16"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search card credit history(携带日期参数)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"status = 0\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(0);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/kuc/v2/cards/{{cardLogID}}/credit-history?fromDate=2024-04-16&toDate=2024-07-16",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"kuc",
+								"v2",
+								"cards",
+								"{{cardLogID}}",
+								"credit-history"
+							],
+							"query": [
+								{
+									"key": "fromDate",
+									"value": "2024-04-16"
+								},
+								{
+									"key": "toDate",
+									"value": "2024-07-16"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "关闭卡片",
+			"item": [
+				{
+					"name": "创建卡片",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"//存储卡片id\r",
+									"var Object_json = JSON.parse(responseBody);\r",
+									"var cardLogID = Object_json.data.cardLogID;\r",
+									"pm.environment.set(\"cardLogID_close\",cardLogID);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cardHolderID\": \"{{cardHolderID}}\",\r\n  \"currency\": \"{{currencyCode}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/kuc/v2/cards",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"kuc",
+								"v2",
+								"cards"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "设置卡片余额(正常场景)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"cardLogId\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.cardLogId).to.eql(pm.environment.get(\"cardLogID_close\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"currentCreditBalance\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.currentCreditBalance).to.eql(pm.environment.get(\"randomAmount\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"currency\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.currency).to.eql(pm.environment.get(\"currencyCode\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"reqBy\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.reqBy).to.eql(pm.environment.get(\"random_string\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"reqAmount\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.reqAmount).to.eql(pm.environment.get(\"randomAmount\"));\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"reqId\": \"{{$guid}}\",\r\n  \"currencyCode\": \"{{currencyCode}}\",\r\n  \"amount\": {{randomAmount}},\r\n  \"requestedBy\": \"{{random_string}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/kuc/v2/cards/{{cardLogID_close}}/credit",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"kuc",
+								"v2",
+								"cards",
+								"{{cardLogID_close}}",
+								"credit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "关闭卡片",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"cardLogID\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.cardLogID).to.eql(pm.environment.get(\"cardLogID_close\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"cardStatus\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.cardStatus).to.eql(\"CLOSED\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/kuc/v2/cards/{{cardLogID_close}}/close",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"kuc",
+								"v2",
+								"cards",
+								"{{cardLogID_close}}",
+								"close"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "关闭卡片(重复关闭)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"errors message\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.errors[0].message).to.eql(\"TripLink api error returnCode=200025 msg=card status pre cancel not allow\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/kuc/v2/cards/{{cardLogID_close}}/close",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"kuc",
+								"v2",
+								"cards",
+								"{{cardLogID_close}}",
+								"close"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "暂停卡片",
+			"item": [
+				{
+					"name": "创建卡片",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"//存储卡片id\r",
+									"var Object_json = JSON.parse(responseBody);\r",
+									"var cardLogID = Object_json.data.cardLogID;\r",
+									"pm.environment.set(\"cardLogID_suspend\",cardLogID);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cardHolderID\": \"{{cardHolderID}}\",\r\n  \"currency\": \"{{currencyCode}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/kuc/v2/cards",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"kuc",
+								"v2",
+								"cards"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "设置卡片余额(正常场景)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"cardLogId\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.cardLogId).to.eql(pm.environment.get(\"cardLogID_suspend\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"currentCreditBalance\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.currentCreditBalance).to.eql(pm.environment.get(\"randomAmount\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"currency\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.currency).to.eql(pm.environment.get(\"currencyCode\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"reqBy\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.reqBy).to.eql(pm.environment.get(\"random_string\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"reqAmount\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.reqAmount).to.eql(pm.environment.get(\"randomAmount\"));\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var randomAmount = Math.random()*1000;\r",
+									"pm.environment.set(\"randomAmount\",randomAmount);\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"reqId\": \"{{$guid}}\",\r\n  \"currencyCode\": \"{{currencyCode}}\",\r\n  \"amount\": {{randomAmount}},\r\n  \"requestedBy\": \"{{random_string}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/kuc/v2/cards/{{cardLogID_suspend}}/credit",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"kuc",
+								"v2",
+								"cards",
+								"{{cardLogID_suspend}}",
+								"credit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "冻结卡片",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"cardLogID\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.cardLogID).to.eql(pm.environment.get(\"cardLogID_suspend\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"cardStatus\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.cardStatus).to.eql(\"SUSPENDED\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/kuc/v2/cards/{{cardLogID_suspend}}/suspend",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"kuc",
+								"v2",
+								"cards",
+								"{{cardLogID_suspend}}",
+								"suspend"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "解冻卡片",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"cardLogID\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.cardLogID).to.eql(pm.environment.get(\"cardLogID_suspend\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"cardStatus\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.cardStatus).to.eql(\"OPEN\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/kuc/v2/cards/{{cardLogID_suspend}}/unsuspend",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"kuc",
+								"v2",
+								"cards",
+								"{{cardLogID_suspend}}",
+								"unsuspend"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "调整正向金额",
+			"item": [
+				{
+					"name": "创建卡片",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"//存储卡片id\r",
+									"var Object_json = JSON.parse(responseBody);\r",
+									"var cardLogID = Object_json.data.cardLogID;\r",
+									"pm.environment.set(\"cardLogID_adjustment\",cardLogID);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cardHolderID\": \"{{cardHolderID}}\",\r\n  \"currency\": \"{{currencyCode}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/kuc/v2/cards",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"kuc",
+								"v2",
+								"cards"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "increase Credit(正常场景)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"status=0\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.status).to.eql(0);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"currency\": \"{{currencyCode}}\",\r\n  \"amount\": {{randomAmount}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/kuc/v2/cards/{{cardLogID_adjustment}}/credit/increase",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"kuc",
+								"v2",
+								"cards",
+								"{{cardLogID_adjustment}}",
+								"credit",
+								"increase"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "increase Credit(currency=MYR)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var randomAmount = Math.random()*1000;\r",
+									"pm.environment.set(\"randomAmount\",randomAmount);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"errors message\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.errors[0].message).to.eql(\"Invalid input 'MYR' for enum CardCurrency\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"currency\": \"MYR\",\r\n  \"amount\": {{randomAmount}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/kuc/v2/cards/{{cardLogID_adjustment}}/credit/increase",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"kuc",
+								"v2",
+								"cards",
+								"{{cardLogID_adjustment}}",
+								"credit",
+								"increase"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "查询卡片余额",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"cardId\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.cardId).to.eql(pm.environment.get(\"cardLogID_adjustment\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"currencyCode\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.currencyCode).to.eql(pm.environment.get(\"currencyCode\"));\r",
+									"});\r",
+									"\r",
+									"var Object_json = JSON.parse(responseBody);\r",
+									"var balance = Object_json.data.balance;\r",
+									"pm.environment.set(\"balance\",balance);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/kuc/v2/cards/{{cardLogID_adjustment}}/credit",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"kuc",
+								"v2",
+								"cards",
+								"{{cardLogID_adjustment}}",
+								"credit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "调整卡片余额",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"cardLogId\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.cardLogId).to.eql(pm.environment.get(\"cardLogID_adjustment\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"currentCreditBalance\", function () {\r",
+									"    var balance = pm.environment.get(\"balance\").toFixed(2);\r",
+									"    var balance_add = (Number(balance) + Number(pm.environment.get(\"randomAmount\"))).toFixed(2);\r",
+									"    pm.environment.set(\"balance_add\",balance_add);\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(Number(jsonData.data.currentCreditBalance).toFixed(2)).to.eql(balance_add);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"reqId\": \"{{$guid}}\",\r\n  \"currencyCode\": \"{{currencyCode}}\",\r\n  \"amount\": {{randomAmount}},\r\n  \"requestedBy\": \"{{random_string}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/kuc/v2/cards/{{cardLogID_adjustment}}/credit/adjust",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"kuc",
+								"v2",
+								"cards",
+								"{{cardLogID_adjustment}}",
+								"credit",
+								"adjust"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "调整卡片余额扣减（余额不足）",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"InsufficientBalanceException\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"reqId\": \"{{$guid}}\",\r\n  \"currencyCode\": \"{{currencyCode}}\",\r\n  \"amount\": -10000,\r\n  \"requestedBy\": \"wu\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/kuc/v2/cards/{{cardLogID_adjustment}}/credit/adjust",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"kuc",
+								"v2",
+								"cards",
+								"{{cardLogID_adjustment}}",
+								"credit",
+								"adjust"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "查询客户cash flow",
+			"item": [
+				{
+					"name": "根据currencyCode查询客户cashflow",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Fund in for deal #772797(237639)\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/kuc/v2/customer/cashflows?currencyCode=HKD&cashflowID=411&cashflowType=Deposit&fromDate=2024-04-30&toDate=2024-04-30",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"kuc",
+								"v2",
+								"customer",
+								"cashflows"
+							],
+							"query": [
+								{
+									"key": "currencyCode",
+									"value": "HKD"
+								},
+								{
+									"key": "cashflowID",
+									"value": "411"
+								},
+								{
+									"key": "cashflowType",
+									"value": "Deposit"
+								},
+								{
+									"key": "fromDate",
+									"value": "2024-04-30"
+								},
+								{
+									"key": "toDate",
+									"value": "2024-04-30"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "查询货币兑换率",
+			"item": [
+				{
+					"name": "查询货币兑换率",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var date = new Date().toString();\r",
+									"var day = date.split(\" \")[0];\r",
+									"//判断是否是交易日\r",
+									"if(day == \"Sat\" || day == \"Sun\"){\r",
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"    pm.test(\"error message\", function () {\r",
+									"        var jsonData = pm.response.json();\r",
+									"        pm.expect(jsonData.errors[0].message).to.eql(\"It is not a trading day\");\r",
+									"    });\r",
+									"})}else {\r",
+									"    pm.test(\"Status code is 200\", function () {\r",
+									"        pm.response.to.have.status(200);\r",
+									"        \r",
+									"    });\r",
+									"};\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/fx/v2/spot/quotes?symbolId=HKDCNH",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"fx",
+								"v2",
+								"spot",
+								"quotes"
+							],
+							"query": [
+								{
+									"key": "symbolId",
+									"value": "HKDCNH"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
